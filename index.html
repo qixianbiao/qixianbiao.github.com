@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Pairwise Rotation Invariant Co-occurrence Local Binary Pattern</title>
+</head>
+<body>
+<div align="center">
+<div style="width:950px; text-align:left;">
+
+
+  <center>
+    <p><b>
+    <font size=5>
+    Pairwise Rotation Invariant Co-occurrence Local Binary Pattern
+    </font>
+    </b> 
+    </p>
+  </center>
+  
+  
+  <center>
+    <p><font color="#FF0000"><a href="https://sites.google.com/site/xianbiaoqi/">Xianbiao Qi</a>, 
+      </font>
+      
+      <font color="#66FF00"><a href="http://research.microsoft.com/en-us/people/rxiao/">Rong Xiao</a>, 
+      </font>
+      
+      <font color="#333333">
+      <a href="http://sourcedb.siat.cas.cn/zw/zjrc/fyjy/201005/t20100513_2844772.html">Yu Qiao</a>,  
+      </font>
+      
+      <font color="#FF0000">
+      <a href="http://www.pris.net.cn/teacher/guojun">Jun Guo</a>, 
+      </font><a href="http://www.ie.cuhk.edu.hk/people/xotang.shtml">Xiaoou Tang</a>
+    </p>
+    <p>Beijing University of Posts and Telecommunications, Microsoft Coroperation, </p>
+    <p>Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences</p>
+  </center>
+<h2>
+  <b>
+  Abstract
+  </b> 
+  </h2>
+ <p>Designing simple and effective feature is a fundamental problem in computer vision. Spatial co-occurrence could  boost the discriminative power of the features, but many vision applications also suffer from the geometric and photometric variations. Therefore, how to design discirminative and transformation invariant features is crucial to a lot of vision problems. In this paper, we investigate the problem of pairwise transformation invariance, and propose a pairwise rotation invariant co-occurrence local binary pattern (PRI-CoLBP) feature, which well captures the local curvature information between the co-occurrence pair.  The proposed feature is discirminative and computationally efficient.</p>
+ <p>The proposed feature has been widely applied to six applications, including  texture classification, material recognition, flower recognition, leaf recognition, food recognition and scene classification. Superior performances are achieved on all six applications.</p>
+ <p>&nbsp;</p>
+ 
+ <h2><b>
+  Paper
+  </b>
+  </h2>
+  Xianbiao Qi, Rong Xiao, Yu Qiao, Jun Guo, Xiaoou Tang. Pairwise Rotation Invariant Co-occurrence Local Binary Pattern. Submitted to IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI).
+As an extended version of [Qi and Xiao et al., ECCV 2012]. 
+ <p>&nbsp;</p>  
+
+<h2>Features</h2>
+<p>Disciminative power and transformation invariance are the two most important properties of current features. </p>
+<p>Spatial co-occurrence could greatly boost the discriminative power of the features, but its transformation invariant is hard to obtain.</p>
+<p>Different with single feature, to achieve transformation invariance for co-occurrence feature, we should promise the following two conditions:</p>
+<p>			1: The correspondence of described points set should be promised under different image transformations.</p>
+<p>2: The descriptor for points set is transformation invariant.</p>
+<p>In practise, we densely sample each points of the images. </p>
+<p>&nbsp;</p>
+
+<h2>Propoerties</h2>
+<p>The proposed feature has the following properties:</p>
+<p>1: Rotation Invariant.</p>
+<p>2: Computationally Efficient.</p>
+<p>3: Extremely Effecitive on describing texture information.</p>
+<p>&nbsp;</p>
+
+
+<h2>Source Code for Benchmark Evaluation</h2>
+<p><font color="#66FF00"><a href="SourceCode/sift.zip">Source Code Download</a></font></p>
+<p>With the provided source code, you could easily run and get our results. </p>
+<p>&nbsp;</p>
+
+
+
+<h2>Feature Matrices</h2>
+<p>The feature matrices are avialble at <a href="features/features.html">This Link</a>.</p>
+<p>&nbsp;</p>
+
+
+<h2>Related Toolboxs</h2>
+<p><a href="http://www.vlfeat.org/">VLFeat</a>.</p>
+<p><a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">LibSVM</a>.</p>
+<p>&nbsp;</p>
+
+
+<h2>Applications</h2>
+The proposed feature is extremely effective on a lot of applications, such as texture classification, material recognition, flower recognition, leaf recognition, food recognition and scene classification.
+<center><h4>Texture Classification</h4></center>
+<p>In our work, we test our feature on three texutre datasets, include <a href="http://www.ux.uis.no/~tranden/brodatz.html">Brodatz</a>, <a href="http://www.cs.columbia.edu/CAVE/software/curet/">CUReT</a>, and <a href="http://www.nada.kth.se/cvap/databases/kth-tips/download.html">KTH-TIPS</a>.</p>
+
+<center>
+<img src="images/texture.jpg" width="400" height="350" alt="Texture" />
+</center>
+
+<center><h4>Material Recognition</h4></center>
+<center>
+<img src="images/material.jpg" width="450" height="200" alt="Material" />
+</center>
+
+<center><h4>Flower Recognition</h4></center>
+<center>
+  <img src="images/flower.jpg" width="550" height="200" alt="Flower" />
+</center>
+
+<center><h4>Leaf Recognition</h4></center>
+<center>
+  <img src="images/leaf.jpg" width="550" height="250" alt="Leaf" />
+</center>
+
+<center><h4>Food Recognition</h4></center>
+<center>
+  <img src="images/food.jpg" width="500" height="150" alt="Food" />
+</center>
+
+<center><h4>Scene Classification</h4></center>
+<center>
+  <p><img src="images/scene.jpg" width="500" height="300" alt="Scene" />
+  </p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</center>
+
+<h2>Acknowledgments</h2>
+<p>This work was supported by National Natural Science Foundation of China(Grant No.61005004 and 61175011),the 111 project(Grant No.B08004), and the Fundamental Research Funds for the Central Universities(Grant No.2012RC0108).</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</div>
+</div>
+</body>
+</html>
