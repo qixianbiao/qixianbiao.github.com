@@ -10,7 +10,7 @@
 
 
 <h2>Texture Classification</h2>
-In our experiment, we use 3, 40, 46 training samples for Brodatz, CUReT and KTH-TIPS individually. 
+In our experiment, we use 3, 40, 46 training samples for Brodatz, CUReT and KTH-TIPS individually. We directly extract PRI-CoLBP on the texture images and the feature dimension is 1180. We use one-vs-the-rest kernel SVM Classifier.
 <p>&nbsp;</p>
 <right>
 <img src="images/texture.jpg" width="400" height="350" alt="Texture" />
@@ -20,7 +20,12 @@ In our experiment, we use 3, 40, 46 training samples for Brodatz, CUReT and KTH-
 <img src="images/texture_result.jpg" width="400" height="350" alt="Texture" />
 </right>
 <p> </p>
-The results show that
+	PRI-CoLBP is designed to capture spatial co-occurrence of LBP. For the table,  we can find that PRI-CoLBP significantly outperforms multi-scale LBP.  Meanwhile, it also exceed some state-of-the-art methods.
+Although extracting multi-scale and multi-orientation PRI-CoLBP could further boost the performance, we just demonstrate the effectiveness of the PRI-CoLBP.
+It should be noted that the PRI-CoLBP is computationally efficient. It takes about 0.031s to process an 200*200 image.
+ 
+
+<font color="#669933">
 <br></br>
 <br>
 [35] H. Nguyen, R. Fablet, and J. Boucher, “Visual textures as realizations of multivariate log-gaussian cox processes,” CVPR, 2011.</br>
@@ -31,10 +36,12 @@ The results show that
 <br>[9] T. Ojala, M. Pietik¨ ainen, and T. M¨ aenp¨ a¨ a, “Multiresolution gray-scale and rotation invariant texture classiﬁcation with local binary patterns,” PAMI, 2002.</br>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+</font>
+
 
 
 <h2>Material Recognition</h2>
-I will add the content later.
+The Flickr Material Database is chanllenging. FMD contains 10 classes which consist of fabric, foliage, glass, leather, metal, paper, plastic, stone, water and wood. Each category contains 100 images, where 50 in all 100 images is close-up views and the rest 50 are of views at object-scale. We extract PRI-CoLBP on the forground region provided by original authors. We use 50 training samples and the rest for test.
 <p>&nbsp;</p>
 <right>
 <img src="images/material.jpg" width="400" height="280" alt="Material" />
@@ -43,16 +50,23 @@ I will add the content later.
 <img src="images/FMD_result.jpg" width="400" height="300" alt="Material" />
 </right>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
 
+For single feature, PRI-CoLBP greatly outperforms bag of SIFT and kernel descriptor. Meanwhile, it also exceed the combinations of four kernel descriptors. It should be pointed out that SVM classifier works better than the augmented Latent Dirichlet Allocation (aLDA) method.
+<br></br>
+
+<font color="#669933">
 <br> </br>
 [22] C. Liu, L. Sharan, E. Adelson, and R. Rosenholtz, “Exploring features in a bayesian framework for material recognition,” CVPR, 2010.
 <br> </br>
 [37] D. Hu and L. Bo, “Toward robust material recognition for everyday objects,” BMVC, 2011.
 <br> </br>
+</font>
 
 <h2>Flower Recognition</h2>
-I will add the content later.
+
+The table shows a comparison between recent publications on the Oxford Flower 102 dataset. To failly compare our feature with new published work [27], we use the same classifier (Adaptive kernel approximation and linear SVM) with them. The mean per-class percent accuracy is applied. 
+
+
 <p>&nbsp;</p>
 <center>
   <img src="images/flower.jpg" width="700" height="250" alt="Flower" />
@@ -62,6 +76,13 @@ I will add the content later.
 </center>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+First of all, we want to thank Andrew Zisserman's group for some valuable discussion. The work is firstly motivated by working on flower recognition project. Their works on flower segmentation and recognition are great.
+
+<br> </br>
+For single feature, PRI-CoLBP outperforms its competitors, such as MSLBP, CoHED, Bag-of-foreground SIFT, color histogram. For feature combination, it also improves the work of Nilsback et al. and Chai's work.
+
+<br> </br>
+<font color="#669933">
 <br> </br>
 [4] S. Ito and S. Kubota, “Object classiﬁcation using heterogeneous co-occurrence features,” ECCV, 2010.
 <br> </br>
@@ -75,6 +96,7 @@ I will add the content later.
 <br> </br>
 [42] X. Yuan and S. Yan, “Visual classiﬁcation with multi-task joint sparse representation,” CVPR, 2010.
 <br> </br>
+</font>
 
 
 
@@ -91,6 +113,7 @@ I will add the content later.
 <p>&nbsp;</p>
 
 
+<font color="#669933">
 <br> </br>
 [24] O. S¨ oderkvist, “Computer vision classiﬁcation of leaves from swedish trees,” Master’s Thesis, Linkoping University, 2001.
 <br> </br>
@@ -100,6 +123,7 @@ I will add the content later.
 <br> </br>
 [47] P. Felzenszwalb and J. Schwartz, “Hierarchical matching of deformable shapes,” in CVPR, 2007.
 <br> </br>
+</font>
 
 
 
@@ -117,11 +141,16 @@ I will add the content later.
 </center>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+
+
+
+<font color="#669933">
 <br> </br>
 [15] S. Yang, M. Chen, D. Pomerleau, and R. Sukthankar, “Food recognition using statistics of pairwise local features,” CVPR, 2010.
 <br> </br>
 [48] J. Shotton, M. Johnson, and R. Cipolla, “Semantic texton forests for image categorization and segmentation,” CVPR, 2008.
 <br> </br>
+</font>
 
 
 <h2>Scene Classification</h2>
@@ -136,6 +165,9 @@ I will add the content later.
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 
+
+
+<font color="#669933">
 <br> </br>
 [14] N. Rasiwasia and N. Vasconcelos, “Holistic context modeling using semantic co-occurrences,” in CVPR, 2009.
 <br> </br>
@@ -147,7 +179,7 @@ I will add the content later.
 <br> </br>
 [50] J. C. van Gemert, C. J. Veenman, A. W. M. Smeulders, and J. M. Geusebroek, “Visual word ambiguity,” PAMI, 2009.
 <br> </br>
-
+</font>
 
 
 
