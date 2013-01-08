@@ -20,7 +20,7 @@
   
   
   <center>
-    <p><font color="#FF0000"><a href="https://sites.google.com/site/xianbiaoqi/">Xianbiao Qi</a>, 
+    <p><font color="#000000"><a href="https://sites.google.com/site/xianbiaoqi/">Xianbiao Qi</a>, 
       </font>
       
       <font color="#66FF00"><a href="http://research.microsoft.com/en-us/people/rxiao/">Rong Xiao</a>, 
@@ -30,20 +30,24 @@
       <a href="http://sourcedb.siat.cas.cn/zw/zjrc/fyjy/201005/t20100513_2844772.html">Yu Qiao</a>,  
       </font>
       
-      <font color="#FF0000">
+      <font color="#000000">
       <a href="http://www.pris.net.cn/teacher/guojun">Jun Guo</a>, 
-      </font><a href="http://www.ie.cuhk.edu.hk/people/xotang.shtml">Xiaoou Tang</a>
+      </font>
+      <font color="#FF0000">
+      <a href="http://www.ie.cuhk.edu.hk/people/xotang.shtml">Xiaoou Tang</a>
+      </font>
+      
     </p>
-    <p>Beijing University of Posts and Telecommunications, Microsoft Coroperation, </p>
-    <p>Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences</p>
+    <p><font color="#000000">Beijing University of Posts and Telecommunications</font>, <font color="#66FF00">Microsoft Coroperation</font>, </p>
+    <p><font color="#333333">Shenzhen Institutes of Advanced Technology of Chinese Academy of Sciences</font>, The Chinese University of Hong Kong.</p>
   </center>
 <h2>
   <b>
   Abstract
   </b> 
-  </h2>
- <p>Designing simple and effective feature is a fundamental problem in computer vision. Spatial co-occurrence could  boost the discriminative power of the features, but many vision applications also suffer from the geometric and photometric variations. Therefore, how to design discirminative and transformation invariant features is crucial to a lot of vision problems. In this paper, we investigate the problem of pairwise transformation invariance, and propose a pairwise rotation invariant co-occurrence local binary pattern (PRI-CoLBP) feature, which well captures the local curvature information between the co-occurrence pair.  The proposed feature is discirminative and computationally efficient.</p>
- <p>The proposed feature has been widely applied to six applications, including  texture classification, material recognition, flower recognition, leaf recognition, food recognition and scene classification. Superior performances are achieved on all six applications.</p>
+  </h2> 
+ <p>Designing simple and effective feature is a fundamental problem in computer vision. However, it is usually difficult to achieve great trade-off between the discriminative power and transformation invriance. Spatial co-occurrence could boost the discriminative power of the features, but it also suffer from the geometric and photometric variations. In this work, we investigate rotation invariant property of co-occurrence feature, and introduce a novel pairwise rotation invariant co-occurrence local binary pattern (PRI-CoLBP) feature which incorporates two types of context, spatial co-occurrence and orientation co-occurrence. Different from traditional rotation invariant local features, pairwise rotation invariant co-occurrence features preserve the relative angles between the orientations of individual features. The relative angle depicts the local curvature information, which is discriminative.</p>
+ <p>The proposed PRI-CoLBP is computationally efficient and has been applied to six types of applications, including texture classification, material classification, flower recognition, leaf recognition, food recognition and scene recognition. Superior performance on such applications demonstrate the effectiveness of the proposed PRI-CoLBP.</p>
  <p>&nbsp;</p>
  
  <h2><b>
@@ -55,8 +59,7 @@ As an extended version of [Qi and Xiao et al., ECCV 2012].
  <p>&nbsp;</p>  
 
 <h2>Features</h2>
-<p>Disciminative power and transformation invariance are the two most important properties of current features. </p>
-<p>Spatial co-occurrence could greatly boost the discriminative power of the features, but its transformation invariant is hard to obtain.</p>
+<p>Disciminative power and transformation invariance are the two most important properties of current features. Spatial co-occurrence could greatly boost the discriminative power of the features, but its transformation invariant is hard to obtain.</p>
 <p>Different with single feature, to achieve transformation invariance for co-occurrence feature, we should promise the following two conditions:</p>
 <p>			1: The correspondence of described points set should be promised under different image transformations.</p>
 <p>2: The descriptor for points set is transformation invariant.</p>
@@ -78,9 +81,6 @@ As an extended version of [Qi and Xiao et al., ECCV 2012].
 
 
 
-<h2>Feature Matrices</h2>
-<p>The feature matrices are avialble at <a href="features/features.html">This Link</a>.</p>
-<p>&nbsp;</p>
 
 
 
@@ -98,22 +98,27 @@ The proposed feature is extremely effective on a lot of applications, such as te
 <p> </p>
 <center>
 <font size=4><a href="Texture.html">Texture Classification</a></font>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <font size=4><a href="Material.html">Material Recognition</a></font>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <font size=4><a href="Flower.html">Flower Recognition</a></font>
 </center>
 <p> </p>
 
-
 <div style="text-align:center">  <font size=4><a href="Leaf.html">Leaf Recognition</a></font>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <font size=4><a href="Food.html">Food Recognition</a></font>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <font size=4><a href="Scene.html">Scene Classification</a></font>  </div>
-
 <p>&nbsp;</p>  
+
+
+
+<h2>Feature Matrices</h2>
+<p>The feature matrices are avialble at <a href="features/features.html">This Link</a>.</p>
+<p>&nbsp;</p>
+
   
 <h2>Related Toolboxs</h2>
 <p><a href="http://www.vlfeat.org/">VLFeat</a>.</p>
@@ -127,8 +132,7 @@ The proposed feature is extremely effective on a lot of applications, such as te
 <p>This work was supported by National Natural Science Foundation of China(Grant No.61005004 and 61175011),the 111 project(Grant No.B08004), and the Fundamental Research Funds for the Central Universities(Grant No.2012RC0108).</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+
 
 </div>
 </div>
