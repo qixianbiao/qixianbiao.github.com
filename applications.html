@@ -20,6 +20,7 @@ In our experiment, we use 3, 40, 46 training samples for Brodatz, CUReT and KTH-
 <img src="images/texture_result.jpg" width="400" height="350" alt="Texture" />
 </right>
 <p> </p>
+<p>&nbsp;</p>
 	PRI-CoLBP is designed to capture spatial co-occurrence of LBP. For the table,  we can find that PRI-CoLBP significantly outperforms multi-scale LBP.  Meanwhile, it also exceed some state-of-the-art methods.
 Although extracting multi-scale and multi-orientation PRI-CoLBP could further boost the performance, we just demonstrate the effectiveness of the PRI-CoLBP.
 It should be noted that the PRI-CoLBP is computationally efficient. It takes about 0.031s to process an 200*200 image.
@@ -28,8 +29,7 @@ It should be noted that the PRI-CoLBP is computationally efficient. It takes abo
 <font color="#669933">
 <br></br>
 <h4>References</h4>
-<br>
-[35] H. Nguyen, R. Fablet, and J. Boucher, “Visual textures as realizations of multivariate log-gaussian cox processes,” CVPR, 2011.</br>
+[35] H. Nguyen, R. Fablet, and J. Boucher, “Visual textures as realizations of multivariate log-gaussian cox processes,” CVPR, 2011.
 <br>[8] J. Zhang, M. Marszalek, S. Lazebnik, and C. Schmid, “Local features and kernels for classiﬁcation of texture and object categories: A comprehensive study,” CVPR, 2007.</br>
 <br>[33] M. Varma and A. Zisserman, “A statistical approach to material classiﬁcation using image patch exemplars,” PAMI, 2008.</br>
 <br>[34] B. Caputo, E. Hayman, M. Fritz, and J. Eklundh, “Classifying materials in the real world,” Image and Vision Computing, 2010.</br>
@@ -80,7 +80,6 @@ The table shows a comparison between recent publications on the Oxford Flower 10
   <img src="images/flower_result.jpg" width="600" height="350" alt="Flower" />
 </center>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
 First of all, we want to thank Andrew Zisserman's group for some valuable discussion. The work is firstly motivated by working on flower recognition project. Their works on flower segmentation and recognition are great.
 
 <br> </br>
@@ -109,7 +108,7 @@ For single feature, PRI-CoLBP outperforms its competitors, such as MSLBP, CoHED,
 
 
 <h2>Leaf Recognition</h2>
-I will add the content later.
+Using adaptive threshold segmentation, we can automatically segment out the flower from white backgournd, and extract the PRI-CoLBP on the foreground region. Following the standard configuration, we use 25 training samples and the rest for test.
 <p>&nbsp;</p>
 <center>
   <img src="images/leaf.jpg" width="700" height="250" alt="Leaf" />
@@ -118,8 +117,8 @@ I will add the content later.
   <img src="images/leaf_result.jpg" width="800" height="250" alt="Leaf" />
 </center>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
 
+Leaf recognition problem is first dealed with as a shape recognition problem. We conclude our PRI-CoLBP and CENTRIST [45] as a texture-based method. The texture-based could well handle partial loss. 
 
 <font color="#669933">
 <br> </br>
@@ -138,7 +137,7 @@ I will add the content later.
 
 
 <h2>Food Recognition</h2>
-I will add the content later.
+In this paper, we totally follow the experimental setup of [15]. We run experiments on 61 categories and 7 major categories individually.
 <p>&nbsp;</p>
 <center>
   <img src="images/food.jpg" width="800" height="200" alt="Food" />
@@ -150,7 +149,8 @@ I will add the content later.
   <img src="images/food_result2.jpg" width="600" height="450" alt="Food" />
 </center>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
+
+Only using gray images, our method greatly outperforms the work of [15]. Using color images like [15], we further improves our feature.  The dimension of PRI-CoLBP on gray image is 1180, and the dimension of color PRI-CoLBP is 3560.  
 
 
 
