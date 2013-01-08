@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Material Recognition</title>
+</head>
+
+
+
+<h2>Material Recognition</h2>
+The Flickr Material Database is chanllenging. FMD contains 10 classes which consist of fabric, foliage, glass, leather, metal, paper, plastic, stone, water and wood. Each category contains 100 images, where 50 in all 100 images is close-up views and the rest 50 are of views at object-scale. We extract PRI-CoLBP on the forground region provided by original authors. We use 50 training samples and the rest for test.
+<p>&nbsp;</p>
+<right>
+<img src="images/material.jpg" width="400" height="280" alt="Material" />
+</right>
+<right>
+<img src="images/FMD_result.jpg" width="400" height="300" alt="Material" />
+</right>
+<p>&nbsp;</p>
+
+For single feature, PRI-CoLBP greatly outperforms bag of SIFT and kernel descriptor. Meanwhile, it also exceed the combinations of four kernel descriptors. It should be pointed out that SVM classifier works better than the augmented Latent Dirichlet Allocation (aLDA) method.
+<br></br>
+
+<font color="#669933">
+<br> </br>
+<h4>References</h4>
+[22] C. Liu, L. Sharan, E. Adelson, and R. Rosenholtz, “Exploring features in a bayesian framework for material recognition,” CVPR, 2010.
+<br> </br>
+[37] D. Hu and L. Bo, “Toward robust material recognition for everyday objects,” BMVC, 2011.
+<br> </br>
+</font>
+
+
+<body>
+</body>
+</html>

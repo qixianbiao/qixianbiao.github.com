@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Texure Classification</title>
+</head>
+
+
+<h2>Texture Classification</h2>
+In our experiment, we use 3, 40, 46 training samples for Brodatz, CUReT and KTH-TIPS individually. We directly extract PRI-CoLBP on the texture images and the feature dimension is 1180. We use one-vs-the-rest kernel SVM Classifier.
+<p>&nbsp;</p>
+<right>
+<img src="images/texture.jpg" width="400" height="350" alt="Texture" />
+</right>
+
+<right>
+<img src="images/texture_result.jpg" width="400" height="350" alt="Texture" />
+</right>
+<p> </p>
+<p>&nbsp;</p>
+	PRI-CoLBP is designed to capture spatial co-occurrence of LBP. For the table,  we can find that PRI-CoLBP significantly outperforms multi-scale LBP.  Meanwhile, it also exceed some state-of-the-art methods.
+Although extracting multi-scale and multi-orientation PRI-CoLBP could further boost the performance, we just demonstrate the effectiveness of the PRI-CoLBP.
+It should be noted that the PRI-CoLBP is computationally efficient. It takes about 0.031s to process an 200*200 image.
+ 
+
+<font color="#669933">
+<br></br>
+<h4>References</h4>
+[35] H. Nguyen, R. Fablet, and J. Boucher, “Visual textures as realizations of multivariate log-gaussian cox processes,” CVPR, 2011.
+<br>[8] J. Zhang, M. Marszalek, S. Lazebnik, and C. Schmid, “Local features and kernels for classiﬁcation of texture and object categories: A comprehensive study,” CVPR, 2007.</br>
+<br>[33] M. Varma and A. Zisserman, “A statistical approach to material classiﬁcation using image patch exemplars,” PAMI, 2008.</br>
+<br>[34] B. Caputo, E. Hayman, M. Fritz, and J. Eklundh, “Classifying materials in the real world,” Image and Vision Computing, 2010.</br>
+<br>[6] S. Lazebnik, C. Schmid, and J. Ponce, “A sparse texture representation using local afﬁne regions,” PAMI, 2005.</br>
+<br>[9] T. Ojala, M. Pietik¨ ainen, and T. M¨ aenp¨ a¨ a, “Multiresolution gray-scale and rotation invariant texture classiﬁcation with local binary patterns,” PAMI, 2002.</br>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</font>
+
+
+
+
+<body>
+</body>
+</html>

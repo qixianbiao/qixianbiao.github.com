@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Leaf Recognition</title>
+</head>
+
+<body>
+
+
+
+<h2>Leaf Recognition</h2>
+Using adaptive threshold segmentation, we can automatically segment out the flower from white backgournd, and extract the PRI-CoLBP on the foreground region. Following the standard configuration, we use 25 training samples and the rest for test.
+<p>&nbsp;</p>
+<center>
+  <img src="images/leaf.jpg" width="700" height="250" alt="Leaf" />
+</center>
+<center>
+  <img src="images/leaf_result.jpg" width="800" height="250" alt="Leaf" />
+</center>
+<p>&nbsp;</p>
+
+Leaf recognition problem is first dealed with as a shape recognition problem. We conclude our PRI-CoLBP and CENTRIST [45] as a texture-based method. The texture-based could well handle partial loss. 
+
+<font color="#669933">
+<br> </br>
+<h4>References</h4>
+[24] O. S¨ oderkvist, “Computer vision classiﬁcation of leaves from swedish trees,” Master’s Thesis, Linkoping University, 2001.
+<br> </br>
+[45] J. Wu and J. Rehg, “Centrist: A visual descriptor for scene categorization,” PAMI, 2011.
+<br> </br>
+[46] H. Ling and D. Jacobs, “Shape classiﬁcation using the inner-distance,” PAMI, 2007
+<br> </br>
+[47] P. Felzenszwalb and J. Schwartz, “Hierarchical matching of deformable shapes,” in CVPR, 2007.
+<br> </br>
+</font>
+
+</body>
+</html>
