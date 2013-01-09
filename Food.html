@@ -24,7 +24,7 @@ Following the standard experimental
 protocol proposed by Chen et al. [30] and perform 3-fold cross-validation for our experiments, using 12 images from two instance for training and 6 images
 from the third part for testing. The averaged results are reported. The protocol ensures that no images of any given food item ever appears in both
 the training and test sets.
- In this paper, we strictly follow the experimental setups of [15]. For PRI-CoLBP<sub>g</sub>, we just use one template, thus the feature dimenision is 590.
+ In this paper, we strictly follow the experimental setups of [15].
 <p> </p> 
  
  
@@ -54,14 +54,14 @@ The table shows the classification accuracy on 61 categories. The first five res
 from [15], where GIR means the global ingredient representation [48].
 <p> </p> 
 
-The chance recognition rate for 61 categories is below 2%(1/61). Traditional bag-of-sift with kernel SVM achieves 9.2%. Color histogram with kernel SVM obtains 11.3%. The GIR global ingredient histogram method achieves 19%, and the performances of local pairwise features range from 19% to 28%. The best performance achieved by [15] is 28.2% by using orientation and midpoint category joint pairwise features. With same classification method as \cite{yang2010food}, our method
+The chance recognition rate for 61 categories is below 2%(1/61). Traditional bag-of-sift with kernel SVM achieves 9.2%. Color histogram with kernel SVM obtains 11.3%. The GIR global ingredient histogram method achieves 19%, and the performances of local pairwise features range from 19% to 28%. The best performance achieved by [15] is 28.2% by using orientation and midpoint category joint pairwise features. With same classification method as [15], our method
  achieves 37.5% accuracy on the gray images and 43.1% accuracy on the color images.
 <p> </p> 
 
-Compared with [15], PRI-CoLBP<sub>g</sub> doesn't need the preprocessing. In [15], they use Semantic Texton Forests(STF) \cite{shotton2008semantic} to create pixel-wise soft labels for the images, and then the created pixel-wise labels are used to make pairwise statistics between different ingredients of the food items. Thus, their methods greatly depend on the
+Compared with [15], PRI-CoLBP<sub>g</sub> doesn't need the preprocessing. In [15], they use Semantic Texton Forests(STF) [48] to create pixel-wise soft labels for the images, and then the created pixel-wise labels are used to make pairwise statistics between different ingredients of the food items. Thus, their methods greatly depend on the
 accuracy of soft ingredients labeling of pixels. Furthermore, The dimensions of their used features
-are proportional to $o(N^2)$, where $N$ is the number of the ingredient categories. The
-feature dimension of [15] is 6144, but the dimension of our PRI-CoLBP<sub>g</sub> for food recognition is 1180$\times$3=3560.
+are proportional to N<sup>2</sup>, where N is the number of the ingredient categories. The
+feature dimension of [15] is 6144, but the dimension of our PRI-CoLBP<sub>g</sub> for food recognition is 1180*3=3560.
 <p> </p> 
 
 The biggest challenging for PFID is that the training data is from two different days with 6 images per day, but the testing
@@ -73,7 +73,7 @@ be noted that for all 61 categories, almost 20 categories have classification ac
 
 <h2>Experiments on Seven Major Groups</h2>
 
-The overall low accuracy on 61 categories is due to two aspects. First, many foods with similar appearances and similar ingredients are assigned to different categories in the PFID dataset. Second, the training and testing data are acquired in different days and the training data has strong viewpoint change. In this paper, in order to investigate the effect of the first aspect, following [15], we split 61 PFID food categories into seven major groups - sandwiches, salads/sides, chichen, breads/pastries, donuts, bagels, and tacos. Then, we test the proposed feature on the modified dataset. The classification accuracy is shown in Fig. \ref{fig:Food2}.
+The overall low accuracy on 61 categories is due to two aspects. First, many foods with similar appearances and similar ingredients are assigned to different categories in the PFID dataset. Second, the training and testing data are acquired in different days and the training data has strong viewpoint change. In this paper, in order to investigate the effect of the first aspect, following [15], we split 61 PFID food categories into seven major groups - sandwiches, salads/sides, chichen, breads/pastries, donuts, bagels, and tacos. Then, we test the proposed feature on the modified dataset. The classification accuracy is shown below.
 <p> </p> 
 
 
@@ -83,12 +83,12 @@ The overall low accuracy on 61 categories is due to two aspects. First, many foo
 </center>
 
 <b> Experimental Analysis: </b> <p> </p>
-The average chance classification accuracy is 14.3%. Color histogram with kernel SVM gets 49.7%, and bag-of-sift with kernel gets 55.3%. With same kernel SVM method, PRI-CoLBP<sub>g</sub> obtains 87.3%, which outperforms traditional bag-of-SIFT feature for about 32\%. Meanwhile, PRI-CoLBP<sub>g</sub> also exceeds the best result of [15] for 9.3%. It should be noted that in order to fair comparison with \cite{yang2010food}, we use same evaluation measure as [15] which is The correct test number / The total test number. We also compute the average class accuracy, the best result of [15] is 64.29% and
+The average chance classification accuracy is 14.3%. Color histogram with kernel SVM gets 49.7%, and bag-of-sift with kernel gets 55.3%. With same kernel SVM method, PRI-CoLBP<sub>g</sub> obtains 87.3%, which outperforms traditional bag-of-SIFT feature for about 32%. Meanwhile, PRI-CoLBP<sub>g</sub> also exceeds the best result of [15] for 9.3%. It should be noted that in order to fair comparison with [15], we use same evaluation measure as [15] which is The correct test number / The total test number. We also compute the average class accuracy, the best result of [15] is 64.29% and
 our PRI-CoLBP<sub>g</sub> is 74.96%.
 
 <h2>Acknowledgments</h2>
 
-Thanks Shuling Yang for providing some experimental details and some training configuration data.
+Thanks <a href="http://homes.cs.washington.edu/~yang/">Shuling Yang</a> for providing some experimental details and some training configuration data.
 
 <font color="#669933">
 <br> </br>

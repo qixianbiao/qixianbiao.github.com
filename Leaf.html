@@ -11,7 +11,7 @@
 <body>
 
 <h2>Leaf Recognition</h2>
-The Swedish leaf dataset has pictures of 15 species of leaves, with 75 images per species. Figure below shows some sample images. Some species are indistinguishable to the untrained eye. Following the standard methods \cite{derkvist2001computer}\cite{wu2011centrist}, we randomly select 25 images
+The Swedish leaf dataset has pictures of 15 species of leaves, with 75 images per species. Figure below shows some sample images. Some species are indistinguishable to the untrained eye. Following the standard methods [24, 45], we randomly select 25 images
 from each species for training and the rest for testing. This dataset is widely used to evaluate shape matching methods [46, 47].<p> </p>
 
 There are several obvious characteristics on this dataset. Firstly, the leaves in the images are manually aligned well and only with very small rotation. Secondly, only the same single side of the leaves are captured. But in fact, both sides of the leaves are usually different. Finally, the leaves has good quality without serious partial loss. Since the dataset has aforementioned three characteristics, thus, there is a strong spatial layout prior on this dataset. The strong spatial information could be used to enhance the classification accuracy. However, in practise, such prior doesn't exist.
@@ -36,7 +36,7 @@ From the table, PRI-CoLBP<sub>g</sub> with kernel SVM greatly outperforms other 
 Compared with shape-based methods, PRI-CoLBP<sub>g</sub> is not sensitive to the  partial loss of the leaf images or additional background, since the partial loss doesn't seriously affect whole texture distribution. Shape-based methods greatly depend on the boundary extraction quantity, but PRI-CoLBP<sub>g</sub> doesn't have such strong requirement.
 
 <h2>Acknowledgments</h2>
-We want to thank Jianxin Wu for some valuable discussion about the experimental details. 
+We want to thank <a href="http://c2inet.sce.ntu.edu.sg/Jianxin/index.html">Jianxin Wu</a> for some valuable discussion about the experimental details. 
 
 <font color="#669933">
 <br> </br>
