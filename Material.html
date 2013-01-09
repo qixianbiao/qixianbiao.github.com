@@ -8,7 +8,15 @@
 
 
 <h2>Material Recognition</h2>
-The Flickr Material Database is chanllenging. FMD contains 10 classes which consist of fabric, foliage, glass, leather, metal, paper, plastic, stone, water and wood. Each category contains 100 images, where 50 in all 100 images is close-up views and the rest 50 are of views at object-scale. We extract PRI-CoLBP on the forground region provided by original authors. We use 50 training samples and the rest for test.
+
+Flickr Material Dataset(FMD) is a newly published material dataset which is considered to be challenging. FMD contains 10 classes which consist of fabric, foliage, glass, leather, metal, paper, plastic, stone, water and wood. Each category contains 100 images, where 50 in all 100 images is  close-up views and the rest 50 are of views at object-scale. We present some samples from five categories in below figure. There is a binary human-labeled mask associated with each image describing the location of the object. For FMD, we just consider the gray image, and extract PRI-CoLBP<sub>g</sub> only on mask regions.
+<p> </p>
+
+<b> State-of-the-arts Methods: </b>
+Liu et al. [22] firstly reported results by exploring four types of features which includes color and texture, micro-texture, outline shape, and reflectance-based features. These four types of features finally lead to seven features. Meanwhile, they proposed an kind of augmented Latent Dirichlet Allocation(aLDA) method to conduct training and classification. Recently, Hu et al. [37] proposed to apply five kernel descriptors and effective matching kernel(EMK) on object classification and material recognition. Krnel descriptors with EMK have shown superior performance on object recognition and scene classification.
+<p> </p>
+Following standard experimental setup, we use 50 samples for training and the rest for test. Same training and testing method is applied with [37]. Experimental results are shown below.
+<p> </p>
 <p>&nbsp;</p>
 <right>
 <img src="images/material.jpg" width="400" height="280" alt="Material" />
@@ -18,8 +26,20 @@ The Flickr Material Database is chanllenging. FMD contains 10 classes which cons
 </right>
 <p>&nbsp;</p>
 
-For single feature, PRI-CoLBP greatly outperforms bag of SIFT and kernel descriptor. Meanwhile, it also exceed the combinations of four kernel descriptors. It should be pointed out that SVM classifier works better than the augmented Latent Dirichlet Allocation (aLDA) method.
-<br></br>
+
+<b> Experimental Analysis: </b> <p> </p>
+From the table, for single feature, PRI-CoLBP<sub>g</sub> outperforms MSLBP for about 13% and bag-of-sift [22] for about 22%. In addition, it improves the previous best single feature for about 8.1% from 49% to 57.1%. Moreover, using same kernel SVM classifier, PRI-CoLBP<sub>g</sub>also beats previously published best performance 54% which combines five kernel descriptors.
+<p> </p>
+
+Here, using RBF kernel SVM, PRI-CoLBP<sub>g</sub> with PCA dimension reduction doesn't further improvement. The task is challenging, and the
+co-pattern distribution varies much more. It lead to that PCA could not always remove noise co-patterns and sometimes will remove some
+discriminative co-patterns. That is the reason why PCA doesn't further improve the performance. With AKA mapping and linear SVM, the performance
+slightly increases from 57.1% to 57.7%.
+<p> </p>
+
+Material recognition is highly related to texture classification. Although the FMD data set has normal rotation variance and the recognition task is challenging because
+ the material exhibits different appearances, PRI-CoLBP<sub>g</sub> still works well on this data set. This well
+ verifies that PRI-CoLBP<sub>g</sub> is an effective texture descriptor.
 
 <font color="#669933">
 <br> </br>

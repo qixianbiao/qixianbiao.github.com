@@ -10,8 +10,14 @@
 
 <h2>Flower Recognition</h2>
 
-The table shows a comparison between recent publications on the Oxford Flower 102 dataset. To failly compare our feature with new published work [27], we use the same classifier (Adaptive kernel approximation and linear SVM) with them. The mean per-class percent accuracy is applied. 
+Oxford Flowers 102 \cite{nilsback2008automated} has 8189 images divided into 102 categories with 40 to 250 images per category. In the figure below, we show some examples from five categories with each column one category. It has been proved that classification with segmentation will boost the final performance. Instead of focusing on segmentation, we use Grabcut to segment one flower instance from each image. It has been suggested in color information could boost the recognition performance. We resize the foreground images to minimum resolution 128 and extract color $\textmd{PRI-CoLBP}_g$ feature on the foreground region.
+<p> </p>
 
+<b> State-of-the-arts Methods: </b>
+The work of [23] is widely recognized as the state-of-the-art method. In [23], Nilsback et al. proposed to apply multiple kernel learning (MKL) to fuse four features. Using the same features, instead of using MKL, Yuan et al. [42] proposed to use multi-task joint sparse representation for feature combination. In [4], Ito et al. proposed several co-occurrence features and apply them flower recognition, but unfortunately, the performance is not satisfactory. In [5], Kanan et al. propose to combine the saliency map and naive bayes nearest neighbor (NBNN). Instead of using SIFT features, they use a filter-based feature which is like the GIST. Different with the SIFT feature, this kind of filter-based feature captures more spatial layout. Meanwhile, the descriptive region is obviously larger than traditional local features. Recently, Chai et al. [27] reports better result on flower recognition. In their paper, they mainly focus on improving the segmentation.  Meanwhile, they modified the four featured used in [23]. They apply Multi Scale Dense Sampling (MSDS) SIFT instead of single scale dense sampling and use Locality-constrained linear coding (LLC) for feature encoding instead of hard assignment. Finally, they use AKA and linear SVM classifier.
+<p> </p>
+
+ We use the same training and testing methods like [27] and use 20 or 30 samples for training and the rest for test. We compare the PRI-CoLBP<sub>g</sub> with some features and evaluate some feature combinations. The experimental results have been shown below. All the results are originally reported except for MSLBP, COHED and MSDS. For MSLBP, we extract three channels' features, therefore, the dimension of MSLBP is 54*3=162. Meanwhile, We reimplement COHED according to [4]. According to [27], we reimplement the bag of MSDS and get performance 69.5%, which is near to their  result 70.0%.
 
 <p>&nbsp;</p>
 <center>
@@ -21,10 +27,30 @@ The table shows a comparison between recent publications on the Oxford Flower 10
   <img src="images/flower_result.jpg" width="600" height="350" alt="Flower" />
 </center>
 <p>&nbsp;</p>
+
+
+<b> Experimental Analysis: </b> <p> </p>
+From the table, for single feature, PRI-CoLBP<sub>g</sub> outperforms MSLBP for 27% and outperforms another co-occurrence feature(COHED) for more than 3%. In addition, PRI-CoLBP<sub>g</sub> also outperforms nowadays best two single feature methods. Specifically, it improves MSDS for about 10\% and the work [5] for 7.7%.<p> </p>
+
+For multiple features combinational methods,
+PRI-CoLBP<sub>g</sub> combined with MSDS achieves 84.2%, which greatly exceeds the work [27] 80.0% which combines four types of features. Meanwhile, PRI-CoLBP<sub>g</sub> combined with MSDS obviously overcomes each of them. It means that PRI-CoLBP<sub>g</sub> is complementary with the MSDS.<p> </p>
+
+There are several reasons for PRI-CoLBP<sub>g</sub> achieving high performance on flower recognition. Firstly, flower recognition is highly related to texture classification task, and PRI-CoLBP<sub>g</sub> is effective on capturing texture information. Secondly, color information is effective for flower recognition, and fortunately, color information can easily be encoded to PRI-CoLBP<sub>g</sub> through extracting PRI-CoLBP<sub>g</sub> on three channels. Finally, there exists strong shape structures on the flower images, as we have described in the paper, PRI-CoLBP<sub>g</sub> pays more weight on the shape region and is more effective on capturing shape information.<p> </p>
+
+
+Among the 102 categories, there exist several categories with low recognition accuracy, where rose is a typical category. The low recognition accuracy derives from the following three reasons. Firstly, the
+viewpoint varies a lot. Part of roses are frontal, some of them are overleaf, and a lot of them are lateral. Secondly, the
+rose category owns multiple colors. It almost covers 10 colors. Finally, even for the same frontal images, the shape varies a
+lot. Meanwhile, we can find that there are several pairs which are easily mixed up with each other, such as lotus and water lily.
+
+
+
+
+
+<h2>Acknowledgments</h2>
+
 First of all, we want to thank Andrew Zisserman's group for some valuable discussion. The work is firstly motivated by working on flower recognition project. Their works on flower segmentation and recognition are great.
 
-<br> </br>
-For single feature, PRI-CoLBP outperforms its competitors, such as MSLBP, CoHED, Bag-of-foreground SIFT, color histogram. For feature combination, it also improves the work of Nilsback et al. and Chai's work.
 
 <br> </br>
 <font color="#669933">

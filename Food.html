@@ -9,7 +9,26 @@
 
 
 <h2>Food Recognition</h2>
-In this paper, we totally follow the experimental setup of [15]. We run experiments on 61 categories and 7 major categories individually.
+Pittsburgh Food Image Dataset(PFID) is a recently released food dataset. The PFID dataset is a collection of fast food images
+and videos from 13 chain restaurants acquired under lab and realistic settings. Like the paper [15], we focus on the set of 61 categories
+of specific food items(e.g. McDonald's Big Mac) with masked background. Each food category consists of three different instances of the food
+(bought on different days from different branches of the restaurant chain), with six images from six viewpoints for each food instance. The figure below shows some samples.
+<p> </p>
+
+Following the standard experimental
+protocol proposed by Chen et al. [30] and perform 3-fold cross-validation for our experiments, using 12 images from two instance for training and 6 images
+from the third part for testing. The averaged results are reported. The protocol ensures that no images of any given food item ever appears in both
+the training and test sets.
+ In this paper, we strictly follow the experimental setups of [15]. For PRI-CoLBP<sub>g</sub>, we just use one template, thus the feature dimenision is 590.
+<p> </p> 
+ 
+ 
+ 
+In this paper, we compare PRI-CoLBP<sub>g</sub> with two baseline algorithms and some related methods proposed in [15]. The two standard baseline algorithms
+are color histogram + SVM and bag of SIFT features + SVM. We also list the experimental results of these two baseline algorithm reported in [15].
+In [15], some features for food recognition are described by exploiting the spatial relationship among different ingredients (such as meat and bread in a sandwich).
+The food items are represented by pairwise co-occurrence statistics between local features of the different ingredients of the food items.
+ 
 <p>&nbsp;</p>
 <center>
   <img src="images/food.jpg" width="800" height="200" alt="Food" />
@@ -22,7 +41,33 @@ In this paper, we totally follow the experimental setup of [15]. We run experime
 </center>
 <p>&nbsp;</p>
 
-Only using gray images, our method greatly outperforms the work of [15]. Using color images like [15], we further improves our feature.  The dimension of PRI-CoLBP on gray image is 1180, and the dimension of color PRI-CoLBP is 3560.  
+
+The table shows the classification accuracy on 61 categories. The first five results are taken
+from [15], where GIR means the global ingredient representation [48].
+<p> </p> 
+
+The chance recognition rate for 61 categories is below 2%(1/61). Traditional bag-of-sift with kernel SVM achieves 9.2%. Color histogram with kernel SVM obtains 11.3%. The GIR global ingredient histogram method achieves 19%, and the performances of local pairwise features range from 19% to 28%. The best performance achieved by [15] is 28.2% by using orientation and midpoint category joint pairwise features. With same classification method as \cite{yang2010food}, our method
+ achieves 37.5% accuracy on the gray images and 43.1% accuracy on the color images.
+<p> </p> 
+
+Compared with [15], PRI-CoLBP<sub>g</sub> doesn't need the preprocessing. In [15], they use Semantic Texton Forests(STF) \cite{shotton2008semantic} to create pixel-wise soft labels for the images, and then the created pixel-wise labels are used to make pairwise statistics between different ingredients of the food items. Thus, their methods greatly depend on the
+accuracy of soft ingredients labeling of pixels. Furthermore, The dimensions of their used features
+are proportional to $o(N^2)$, where $N$ is the number of the ingredient categories. The
+feature dimension of [15] is 6144, but the dimension of our PRI-CoLBP<sub>g</sub> for food recognition is 1180$\times$3=3560.
+<p> </p> 
+
+The biggest challenging for PFID is that the training data is from two different days with 6 images per day, but the testing
+data is from another day. The 6 images in same day are captured on just one entity under 6 different viewpoints. Thus, the true
+training data for each categories is limited to 2 entities. So the training and testing condition is harsh. It requires that the
+used feature should have great generalization ability. Although, PRI-CoLBP<sub>g</sub> outperforms the state-of-the-art methods more than 10\%. It should
+be noted that for all 61 categories, almost 20 categories have classification accuracy of zero.
+<p> </p> 
+
+The overall low accuracy on 61 categories is due to two aspects. First, many foods with similar appearances and similar ingredients are assigned to different categories in the PFID dataset. Second, the training and testing data are acquired in different days and the training data has strong viewpoint change. In this paper, in order to investigate the effect of the first aspect, following [15], we split 61 PFID food categories into seven major groups - sandwiches, salads/sides, chichen, breads/pastries, donuts, bagels, and tacos. Then, we test the proposed feature on the modified dataset. The classification accuracy is shown in Fig. \ref{fig:Food2}.
+<p> </p> 
+
+The average chance classification accuracy is 14.3%. Color histogram with kernel SVM gets 49.7%, and bag-of-sift with kernel gets 55.3%. With same kernel SVM method, PRI-CoLBP<sub>g</sub> obtains 87.3%, which outperforms traditional bag-of-SIFT feature for about 32\%. Meanwhile, PRI-CoLBP<sub>g</sub> also exceeds the best result of [15] for 9.3%. It should be noted that in order to fair comparison with \cite{yang2010food}, we use same evaluation measure as [15] which is The correct test number / The total test number. We also compute the average class accuracy, the best result of [15] is 64.29% and
+our PRI-CoLBP<sub>g</sub> is 74.96%.
 
 
 <font color="#669933">
@@ -30,13 +75,11 @@ Only using gray images, our method greatly outperforms the work of [15]. Using c
 <h4>References</h4>
 [15] S. Yang, M. Chen, D. Pomerleau, and R. Sukthankar, “Food recognition using statistics of pairwise local features,” CVPR, 2010.
 <br> </br>
+[30] M. Chen, K. Dhingra, W. Wu, L. Yang, R. Sukthankar, and J. Yang, “Pﬁd: Pittsburgh fast-food image dataset,” in ICIP, 2009.
+<br> </br>
 [48] J. Shotton, M. Johnson, and R. Cipolla, “Semantic texton forests for image categorization and segmentation,” CVPR, 2008.
 <br> </br>
 </font>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
-
-
-
 </body>
 </html>

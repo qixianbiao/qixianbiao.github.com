@@ -7,7 +7,26 @@
 
 
 <h2>Texture Classification</h2>
-In our experiment, we use 3, 40, 46 training samples for Brodatz, CUReT and KTH-TIPS individually. We directly extract PRI-CoLBP on the texture images and the feature dimension is 1180. We use one-vs-the-rest kernel SVM Classifier.
+
+<b>Brodatz texture album</b> is a well-known benchmark dataset. It contains 111 texture classes, with each class 9 images. For our experiments, we use 3 training samples and the rest for testing.
+<p></p>
+
+<b>CUReT texture dataset</b> is a widely used texture dataset. We use the same subset of images as \cite{varma2008statistical}\cite{caputo2010classifying}, which contains 61 texture classes with 92 images for each class. These images are captured under different illuminations with seven different viewpoint directions. We use 46 training images per class and the rest for test .
+<p></p>
+
+<b>KTH-TIPS dataset</b> consists of 10 texture classes. Images are captured at nine scales, viewed under three different illumination directions and three different poses with 81 images per class. Follow the standard setup, we use 40 images for training per class and the rest for testing.
+<p></p>
+
+<b> State-of-the-arts Methods: </b>
+In [6], Lazebnik et al. proposed to use Harris-affine corners and Laplacian-affine blobs to detect interest point and use SPIN and RIFT as descriptors for texture classification. Nearest neighbor(NN) classifier was use for classification.
+Instead of using NN classifier, Caputo et al. [34] use kernel SVM classifier and prove that SVM classifier achieves better performance than nearest neighbor classifier on texture classification problem. The method of Zhang et al. [8] is widely accepted as the state-of-the-art methods, they evaluate the features and kernels for object and texture classification. In [35], Nguyen et al. propose to use multivariate log-gaussian cox processes for texture classification.
+<p></p>
+
+
+
+The experimental results have been shown below. All results are originally reported except the result of multi-scale LBP (MSLBP) which is based on the standard implement at http://www.cse.oulu.fi/MVG/Downloads using one-vs-the-rest chi_square kernel SVM. According to our experimental observation, one-vs-the-rest strategy outperforms one-vs-one strategy.
+<p></p>
+
 <p>&nbsp;</p>
 <right>
 <img src="images/texture.jpg" width="400" height="350" alt="Texture" />
@@ -18,20 +37,29 @@ In our experiment, we use 3, 40, 46 training samples for Brodatz, CUReT and KTH-
 </right>
 <p> </p>
 <p>&nbsp;</p>
-	PRI-CoLBP is designed to capture spatial co-occurrence of LBP. For the table,  we can find that PRI-CoLBP significantly outperforms multi-scale LBP.  Meanwhile, it also exceed some state-of-the-art methods.
-Although extracting multi-scale and multi-orientation PRI-CoLBP could further boost the performance, we just demonstrate the effectiveness of the PRI-CoLBP.
-It should be noted that the PRI-CoLBP is computationally efficient. It takes about 0.031s to process an 200*200 image.
- 
+
+<b> Experimental Analysis: </b> <p> </p>
+From the table, on all three data sets, PRI-CoLBP<sub>g</sub> significantly outperforms MSLBP. Meanwhile, PRI-CoLBP<sub>g</sub> obviously
+exceeds the performance of [8] and [35] on all the three datasets. Compared with [8]
+and [35], the proposed feature reduces the average error rate from about 4% to 2% which is equivalent to reduce the
+errors by 50%.
+<p></p>
+
+The reason why PRI-CoLBP<sub>g</sub> greatly outperforms MSLBP is that PRI-CoLBP<sub>g</sub> captures spatial context co-occurrence and preserves relative orientation angle information, and the spatial context and relative orientation information are greatly discriminative, whereas multi-scale LBP ignores spatial information.
+<p></p>
+
+Although KTH-TIPS contains scale variance (9 scales and 81 images per class), the scale changes continually from 0.5 to 2 and the variation is relatively small. Thus, PRI-CoLBP<sub>g</sub> works well on this data set and obtains an accuracy of 98.4% performance, which significantly outperforms the best result 96.1%. The experimental result on KTH-TIPS could indirectly reflect that PRI-CoLBP<sub>g</sub> is not sensitive to small scale variance.
+
 
 <font color="#669933">
 <br></br>
 <h4>References</h4>
-[35] H. Nguyen, R. Fablet, and J. Boucher, “Visual textures as realizations of multivariate log-gaussian cox processes,” CVPR, 2011.
+<br>[6] S. Lazebnik, C. Schmid, and J. Ponce, “A sparse texture representation using local afﬁne regions,” PAMI, 2005.</br>
 <br>[8] J. Zhang, M. Marszalek, S. Lazebnik, and C. Schmid, “Local features and kernels for classiﬁcation of texture and object categories: A comprehensive study,” CVPR, 2007.</br>
+<br>[9] T. Ojala, M. Pietik¨ ainen, and T. M¨ aenp¨ a¨ a, “Multiresolution gray-scale and rotation invariant texture classiﬁcation with local binary patterns,” PAMI, 2002.</br>
 <br>[33] M. Varma and A. Zisserman, “A statistical approach to material classiﬁcation using image patch exemplars,” PAMI, 2008.</br>
 <br>[34] B. Caputo, E. Hayman, M. Fritz, and J. Eklundh, “Classifying materials in the real world,” Image and Vision Computing, 2010.</br>
-<br>[6] S. Lazebnik, C. Schmid, and J. Ponce, “A sparse texture representation using local afﬁne regions,” PAMI, 2005.</br>
-<br>[9] T. Ojala, M. Pietik¨ ainen, and T. M¨ aenp¨ a¨ a, “Multiresolution gray-scale and rotation invariant texture classiﬁcation with local binary patterns,” PAMI, 2002.</br>
+[35] H. Nguyen, R. Fablet, and J. Boucher, “Visual textures as realizations of multivariate log-gaussian cox processes,” CVPR, 2011.
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 </font>

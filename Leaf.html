@@ -7,10 +7,16 @@
 
 <body>
 
-
-
 <h2>Leaf Recognition</h2>
-Using adaptive threshold segmentation, we can automatically segment out the flower from white backgournd, and extract the PRI-CoLBP on the foreground region. Following the standard configuration, we use 25 training samples and the rest for test.
+The Swedish leaf dataset has pictures of 15 species of leaves, with 75 images per species. Figure below shows some sample images. Some species are indistinguishable to the untrained eye. Following the standard methods \cite{derkvist2001computer}\cite{wu2011centrist}, we randomly select 25 images
+from each species for training and the rest for testing. This dataset is widely used to evaluate shape matching methods [46, 47].<p> </p>
+
+There are several obvious characteristics on this dataset. Firstly, the leaves in the images are manually aligned well and only with very small rotation. Secondly, only the same single side of the leaves are captured. But in fact, both sides of the leaves are usually different. Finally, the leaves has good quality without serious partial loss. Since the dataset has aforementioned three characteristics, thus, there is a strong spatial layout prior on this dataset. The strong spatial information could be used to enhance the classification accuracy. However, in practise, such prior doesn't exist.
+<p> </p>
+
+<b> State-of-the-arts Methods: </b>
+Shape-based methods are usually used for leaf classification, such as [46, 47]. However, they always suffers from some harsh conditions. Firstly, extracting the shape accurately is still a challenging problem. Usually, canny edge detector is used to extract the shape. Secondly, the partial loss of the leaf and footstalks greatly affect the shape descriptor. Thirdly, there are a lot of categories which look similar. It means that the intra-class variation is small. Finally, due to geometric distortion and photometric variation, such as viewpoint change and fold of the leaves, the shape of the leaves varies a lot. It means that the inter-class variation is large.<p> </p>
+
 <p>&nbsp;</p>
 <center>
   <img src="images/leaf.jpg" width="700" height="250" alt="Leaf" />
@@ -20,7 +26,14 @@ Using adaptive threshold segmentation, we can automatically segment out the flow
 </center>
 <p>&nbsp;</p>
 
-Leaf recognition problem is first dealed with as a shape recognition problem. We conclude our PRI-CoLBP and CENTRIST [45] as a texture-based method. The texture-based could well handle partial loss. 
+
+<b> Experimental Analysis: </b> <p> </p>
+From the table, PRI-CoLBP<sub>g</sub> with kernel SVM greatly outperforms other methods. Specifically, PRI-CoLBP<sub>g</sub> improves the work [45] from 97.87% to 99.38% with the same classification method.  However, it should be note that PRI-CoLBP<sub>g</sub> is used to describe shape and texture information without imposing any overall spatial layout. For the spatial PACT, the images are divided into 3 pyramid. The zero pyramid is the original image; the first pyramid contains 5 block and the second consists of 5*5 blocks. Strong spatial prior have been enforced in spatial PACT. As we have described before, the Swedish leaf data set fortunately satisfies this prior. However, in real leaf classification, such strong prior doesn't exist.
+<p> </p>
+Compared with shape-based methods, PRI-CoLBP<sub>g</sub> is not sensitive to the  partial loss of the leaf images or additional background, since the partial loss doesn't seriously affect whole texture distribution. Shape-based methods greatly depend on the boundary extraction quantity, but PRI-CoLBP<sub>g</sub> doesn't have such strong requirement.
+
+<h2>Acknowledgments</h2>
+We want to thank Jianxin Wu for some valuable discussion about the experimental details. 
 
 <font color="#669933">
 <br> </br>
