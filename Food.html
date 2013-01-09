@@ -4,6 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Food Recognition</title>
 </head>
+<div align="center">
+<div style="width:950px; text-align:left;">
+
 
 <body>
 
@@ -14,6 +17,8 @@ and videos from 13 chain restaurants acquired under lab and realistic settings. 
 of specific food items(e.g. McDonald's Big Mac) with masked background. Each food category consists of three different instances of the food
 (bought on different days from different branches of the restaurant chain), with six images from six viewpoints for each food instance. The figure below shows some samples.
 <p> </p>
+
+<h2>Experiments on 61 Categories</h2>
 
 Following the standard experimental
 protocol proposed by Chen et al. [30] and perform 3-fold cross-validation for our experiments, using 12 images from two instance for training and 6 images
@@ -29,6 +34,9 @@ are color histogram + SVM and bag of SIFT features + SVM. We also list the exper
 In [15], some features for food recognition are described by exploiting the spatial relationship among different ingredients (such as meat and bread in a sandwich).
 The food items are represented by pairwise co-occurrence statistics between local features of the different ingredients of the food items.
  
+ 
+ 
+ 
 <p>&nbsp;</p>
 <center>
   <img src="images/food.jpg" width="800" height="200" alt="Food" />
@@ -36,12 +44,12 @@ The food items are represented by pairwise co-occurrence statistics between loca
 <center>
   <img src="images/food_result.jpg" width="800" height="200" alt="Food" />
 </center>
-<center>
-  <img src="images/food_result2.jpg" width="600" height="450" alt="Food" />
-</center>
+
 <p>&nbsp;</p>
 
 
+
+<b> Experimental Analysis: </b> <p> </p>
 The table shows the classification accuracy on 61 categories. The first five results are taken
 from [15], where GIR means the global ingredient representation [48].
 <p> </p> 
@@ -63,9 +71,18 @@ used feature should have great generalization ability. Although, PRI-CoLBP<sub>g
 be noted that for all 61 categories, almost 20 categories have classification accuracy of zero.
 <p> </p> 
 
+<h2>Experiments on Seven Major Groups</h2>
+
 The overall low accuracy on 61 categories is due to two aspects. First, many foods with similar appearances and similar ingredients are assigned to different categories in the PFID dataset. Second, the training and testing data are acquired in different days and the training data has strong viewpoint change. In this paper, in order to investigate the effect of the first aspect, following [15], we split 61 PFID food categories into seven major groups - sandwiches, salads/sides, chichen, breads/pastries, donuts, bagels, and tacos. Then, we test the proposed feature on the modified dataset. The classification accuracy is shown in Fig. \ref{fig:Food2}.
 <p> </p> 
 
+
+
+<center>
+  <img src="images/food_result2.jpg" width="600" height="450" alt="Food" />
+</center>
+
+<b> Experimental Analysis: </b> <p> </p>
 The average chance classification accuracy is 14.3%. Color histogram with kernel SVM gets 49.7%, and bag-of-sift with kernel gets 55.3%. With same kernel SVM method, PRI-CoLBP<sub>g</sub> obtains 87.3%, which outperforms traditional bag-of-SIFT feature for about 32\%. Meanwhile, PRI-CoLBP<sub>g</sub> also exceeds the best result of [15] for 9.3%. It should be noted that in order to fair comparison with \cite{yang2010food}, we use same evaluation measure as [15] which is The correct test number / The total test number. We also compute the average class accuracy, the best result of [15] is 64.29% and
 our PRI-CoLBP<sub>g</sub> is 74.96%.
 
@@ -81,5 +98,9 @@ our PRI-CoLBP<sub>g</sub> is 74.96%.
 <br> </br>
 </font>
 <p>&nbsp;</p>
+
+
+</div>
+</div>
 </body>
 </html>
