@@ -46,7 +46,7 @@
   Abstract
   </b> 
   </h2> 
- <p>Designing simple and effective feature is a fundamental problem in computer vision. However, it is usually difficult to achieve great trade-off between the discriminative power and transformation invriance. Spatial co-occurrence could boost the discriminative power of the features, but it also suffer from the geometric and photometric variations. In this work, we investigate rotation invariant property of co-occurrence feature, and introduce a novel pairwise rotation invariant co-occurrence local binary pattern (PRI-CoLBP) feature which incorporates two types of context, spatial co-occurrence and orientation co-occurrence. Different from traditional rotation invariant local features, pairwise rotation invariant co-occurrence features preserve the relative angles between the orientations of individual features. The relative angle depicts the local curvature information, which is discriminative.</p>
+ <p>Designing effective feature is a fundamental problem in computer vision. However, it is usually difficult to achieve great trade-off between the discriminative power and transformation invariance. Spatial co-occurrence could boost the discriminative power of the features, but it always suffers from the geometric and photometric variations. In this work, we investigate rotation invariant property of co-occurrence feature, and introduce a novel pairwise rotation invariant co-occurrence local binary pattern (PRI-CoLBP) feature which incorporates two types of context, spatial co-occurrence and orientation co-occurrence. Different from traditional rotation invariant local features, pairwise rotation invariant co-occurrence features preserve the relative angles between the orientations of individual features. The relative angle depicts the local curvature information, which is discriminative.</p>
  <p>The proposed PRI-CoLBP is computationally efficient and has been applied to six types of applications, including texture classification, material classification, flower recognition, leaf recognition, food recognition and scene recognition. Superior performance on such applications demonstrate the effectiveness of the proposed PRI-CoLBP.</p>
  <p>&nbsp;</p>
  
@@ -59,12 +59,12 @@ As an extended version of ECCV 2012 paper <a href="http://link.springer.com/cont
  <p>&nbsp;</p>  
 
 <h2>Features</h2>
-<p>Disciminative power and transformation invariance are the two most important properties of local features. Spatial co-occurrence could greatly boost the discriminative power of the features, but its transformation invariant is hard to obtain. To achieve transformation invariance for co-occurrence feature, we should promise the following two conditions:</p>
+<p>Disciminative power and transformation invariance are the two most important properties of local features. Spatial co-occurrence could greatly boost the discriminative power of the features, but its transformation invariant property is hard to obtain. To achieve transformation invariance for co-occurrence feature, we should promise the following two conditions:</p>
 <ol>
 <li>The correspondence of described points set should be promised under different image transformations.</li>
 <li>The descriptor for points set is transformation invariant.</li>
 </ol> 
-<p>In practise, we densely sample each points of the images. For the same point <b>A</b> in same scene under different image transformation, we should promise that the same points set {<b>B<sub>i</sub></b>} could be uniquely determined.</p>
+<p>In practise, we densely sample each points of the images. For the same point <b>A</b> in the same scene under different image transformation, we should promise that the same points set {<b>B<sub>i</sub></b>} could be uniquely determined.</p>
 
 When the correspondence of described points is promised, we should promise that the descriptor for the same points set
  is transformation invariant.
