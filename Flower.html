@@ -13,7 +13,7 @@
 
 <h2>Flower Recognition</h2>
 
-Oxford Flowers 102 [23] has 8189 images divided into 102 categories with 40 to 250 images per category. In the figure below, we show some examples from five categories with each column one category. It has been proved that classification with segmentation will boost the final performance. Instead of focusing on segmentation, we use Grabcut to segment one flower instance from each image. It has been suggested in color information could boost the recognition performance. We resize the foreground images to minimum resolution 128 and extract color $\textmd{PRI-CoLBP}_g$ feature on the foreground region.
+Oxford Flowers 102 [23] has 8189 images divided into 102 categories with 40 to 250 images per category. In the figure below, we show some examples from five categories with each column one category. It has been proved that classification with segmentation will boost the final performance. Instead of focusing on segmentation, we use Grabcut to segment one flower instance from each image. It has been suggested in color information could boost the recognition performance. We resize the foreground images to minimum resolution 128 and extract color PRI-CoLBP<sub>g</sub> feature on the foreground region.
 <p> </p>
 
 <b> State-of-the-arts Methods: </b>
@@ -33,7 +33,7 @@ The work of [23] is widely recognized as the state-of-the-art method. In [23], N
 
 
 <b> Experimental Analysis: </b> <p> </p>
-From the table, for single feature, PRI-CoLBP<sub>g</sub> outperforms MSLBP for 27% and outperforms another co-occurrence feature(COHED) for more than 3%. In addition, PRI-CoLBP<sub>g</sub> also outperforms nowadays best two single feature methods. Specifically, it improves MSDS for about 10\% and the work [5] for 7.7%.<p> </p>
+From the table, for single feature, PRI-CoLBP<sub>g</sub> outperforms MSLBP for 27% and outperforms another co-occurrence feature (COHED) for more than 3%. In addition, PRI-CoLBP<sub>g</sub> also outperforms nowadays best two single feature methods. Specifically, it improves MSDS for about 10\% and the work [5] for 7.7%.<p> </p>
 
 For multiple features combinational methods,
 PRI-CoLBP<sub>g</sub> combined with MSDS achieves 84.2%, which greatly exceeds the work [27] 80.0% which combines four types of features. Meanwhile, PRI-CoLBP<sub>g</sub> combined with MSDS obviously overcomes each of them. It means that PRI-CoLBP<sub>g</sub> is complementary with the MSDS.<p> </p>
