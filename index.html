@@ -1,159 +1,710 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Pairwise Rotation Invariant Co-occurrence Local Binary Pattern</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xianbiao Qi | AI Researcher</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #1a6496;
+      --accent-light: #2980b9;
+      --text: #2c2c2c;
+      --muted: #666;
+      --border: #e0e0e0;
+      --bg-sidebar: #f8f9fa;
+      --sidebar-width: 280px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text);
+      background: #fff;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0;
+    }
+    nav ul li a {
+      display: block;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover { color: var(--accent); }
+
+    /* ── Layout ── */
+    .container {
+      display: flex;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    /* ── Sidebar ── */
+    aside {
+      width: var(--sidebar-width);
+      flex-shrink: 0;
+      position: sticky;
+      top: 56px;
+    }
+    .avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 1.1rem;
+      border: 3px solid var(--border);
+    }
+    .sidebar-name {
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .sidebar-title {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+    .sidebar-org {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .sidebar-links {
+      list-style: none;
+      font-size: 0.85rem;
+    }
+    .sidebar-links li {
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--text);
+    }
+    .sidebar-links li i {
+      width: 16px;
+      color: var(--accent);
+      text-align: center;
+    }
+    .sidebar-links a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .sidebar-links a:hover { text-decoration: underline; }
+
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.1rem 0;
+    }
+
+    /* ── Main content ── */
+    main { flex: 1; min-width: 0; }
+
+    section {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child { border-bottom: none; }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.3rem;
+      margin-bottom: 1.1rem;
+      display: inline-block;
+    }
+
+    /* ── About ── */
+    .about-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      background: var(--bg-sidebar);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.7rem 1.2rem;
+      text-align: center;
+      min-width: 110px;
+    }
+    .stat-num { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── Experience / Education ── */
+    .entry { margin-bottom: 1.2rem; }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .entry-org { font-weight: 700; color: var(--text); font-size: 0.95rem; }
+    .entry-date { font-size: 0.82rem; color: var(--muted); white-space: nowrap; }
+    .entry-role { font-style: italic; color: var(--muted); font-size: 0.88rem; margin-top: 0.1rem; }
+    .entry-desc { font-size: 0.88rem; color: var(--text); margin-top: 0.2rem; }
+
+    /* ── Publications ── */
+    .pub-category { margin-bottom: 1.6rem; }
+    .pub-category h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .pub-item { margin-bottom: 0.9rem; padding-left: 1rem; border-left: 3px solid var(--border); }
+    .pub-title { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+    .pub-authors { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; }
+    .pub-venue { font-size: 0.82rem; margin-top: 0.1rem; }
+    .pub-venue .venue-name {
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      margin-left: 0.3rem;
+      vertical-align: middle;
+    }
+    .badge-star { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+    .badge-corresponding { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+
+    /* ── Awards ── */
+    .award-item {
+      display: flex;
+      gap: 0.7rem;
+      margin-bottom: 0.55rem;
+      align-items: flex-start;
+      font-size: 0.9rem;
+    }
+    .award-item i { color: #c8a415; margin-top: 0.2rem; flex-shrink: 0; }
+
+    /* ── Teaching ── */
+    .teach-item { margin-bottom: 0.55rem; font-size: 0.9rem; }
+    .teach-item i { color: var(--accent); margin-right: 0.4rem; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .container { flex-direction: column; }
+      aside { width: 100%; position: static; }
+      .avatar { width: 140px; height: 140px; }
+    }
+  </style>
 </head>
 <body>
-<div align="center">
-<div style="width:950px; text-align:left;">
 
+<!-- Navigation -->
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#honors">Honors</a></li>
+  </ul>
+</nav>
 
-  <center>
-    <p><b>
-    <font size=5>
-    Pairwise Rotation Invariant Co-occurrence Local Binary Pattern
-    </font>
-    </b> 
-    </p>
-  </center>
-  
-  
-  <center>
-    <p><a href="https://sites.google.com/site/xianbiaoqi/"><font color="blue">Xianbiao Qi</font></a>, 
-      
-      
-      <a href="http://research.microsoft.com/en-us/people/rxiao/"><font color="black">Rong Xiao</font></a>, 
-      
-      <a href="http://www.pris.net.cn/introduction/teacher/lichunguang"><font color="blue">Chun-Guang Li</font></a>, 
-      
-      <a href="http://sourcedb.siat.cas.cn/zw/zjrc/fyjy/201005/t20100513_2844772.html"> <font color="green">Yu Qiao</font></a>,  
-      
-      
-      
-      <a href="http://www.pris.net.cn/teacher/guojun"><font color="blue"> Jun Guo</font> </a>, 
-      
-     
-      <a href="http://www.ie.cuhk.edu.hk/people/xotang.shtml"> <font color="red">Xiaoou Tang</font></a>
-      
-      
-    </p>
-    <p><font color="blue">Beijing University of Posts and Telecommunications</font>, <font color="black">Microsoft Coroperation</font>, </p>
-    <p><font color="green">Shenzhen Institutes of Advanced Technology of Chinese Academy of Sciences</font>, <font color="red">The Chinese University of Hong Kong</font>.</p>
-  </center>
-<h2>
-  <b>
-  Abstract
-  </b> 
-  </h2> 
- <p>Designing effective feature is a fundamental problem in computer vision. However, it is usually difficult to achieve great trade-off between the discriminative power and transformation invariance. Spatial co-occurrence could boost the discriminative power of the features, but it always suffers from the geometric and photometric variations. In this work, we investigate rotation invariant property of co-occurrence feature, and introduce a novel pairwise rotation invariant co-occurrence local binary pattern (PRI-CoLBP) feature which incorporates two types of context, spatial co-occurrence and orientation co-occurrence. Different from traditional rotation invariant local features, pairwise rotation invariant co-occurrence features preserve the relative angles between the orientations of individual features. The relative angle depicts the local curvature information, which is discriminative.</p>
- <p>The proposed PRI-CoLBP is computationally efficient and has been applied to six types of applications, including texture classification, material classification, flower recognition, leaf recognition, food recognition and scene recognition. Superior performances on such applications demonstrate the effectiveness of the proposed PRI-CoLBP.</p>
- <p>&nbsp;</p>
- 
- <h2><b>
-  Paper
-  </b>
-  </h2>
-  Xianbiao Qi, Rong Xiao, Chun-Guang Li, Yu Qiao, Jun Guo, Xiaoou Tang. <font color="#669933"><i>Pairwise Rotation Invariant Co-occurrence Local Binary Pattern</i></font>. 
-  Published on IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) 2014.
-<a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6787082">pdf</a> . 
- <p>&nbsp;</p>  
+<div class="container">
 
-<h2>Features</h2>
-<p>Discriminative power and transformation invariance are the two most important properties of local features. Spatial co-occurrence could greatly boost the discriminative power of the features, but its transformation invariant property is hard to obtain. To achieve transformation invariance for co-occurrence feature, we should promise the following two conditions:</p>
-<ol>
-<li>The correspondence of described points set should be promised under different image transformations.</li>
-<li>The descriptor for points set is transformation invariant.</li>
-</ol> 
-<p>In practice, we densely sample each points of the images. For the same point <b>A</b> in the same scene under different image transformation, we should promise that the same points set {<b>B<sub>i</sub></b>} could be uniquely determined.</p>
+  <!-- ── Sidebar ── -->
+  <aside>
+    <img src="images/avatar.jpg" alt="Xianbiao Qi" class="avatar" />
+    <div class="sidebar-name">Xianbiao Qi</div>
+    <div class="sidebar-title">Chief AIGC Scientist</div>
+    <div class="sidebar-org">Intellifusion Inc.</div>
 
-When the correspondence of described points is promised, we should promise that the descriptor for the same points set
- is transformation invariant.
+    <ul class="sidebar-links">
+      <li><i class="fa fa-envelope"></i> <a href="mailto:qixianbiao@gmail.com">qixianbiao@gmail.com</a></li>
+      <li><i class="fa-brands fa-google-scholar"></i> <a href="https://scholar.google.com/citations?user=qxam-a8AAAAJ" target="_blank">Google Scholar</a></li>
+      <li><i class="fa-brands fa-bilibili"></i> <a href="https://space.bilibili.com/1706874133" target="_blank">Bilibili</a></li>
+      <li><i class="fa-brands fa-github"></i> <a href="https://github.com/qixianbiao" target="_blank">GitHub</a></li>
+    </ul>
 
+    <hr class="sidebar-divider" />
 
- <p>&nbsp;</p>
+    <ul class="sidebar-links">
+      <li><i class="fa fa-map-marker-alt"></i> Shenzhen, China</li>
+      <li><i class="fa fa-graduation-cap"></i> Ph.D., BUPT, 2015</li>
+    </ul>
 
-<h2>Properties</h2>
-<p>The proposed feature has the following properties:</p>
+    <hr class="sidebar-divider" />
+    <div style="font-size:0.78rem; color:var(--muted); text-align:center;">
+      ICLR 2026 Area Chair<br/>
+      CVPR 2021 Outstanding Reviewer
+    </div>
+  </aside>
 
-<ul>
-<li>Gray-scale invariant. </li>
-<li>Rotation invariant.</li>
-<li>Extremely effective on describing texture information.</li>
-<li>Computationally efficient.</li>
-<li>Effective on capturing edges and contours structures through paying more attention to such regions.</li>
-<li>Flexible to fuse color information. </li>
-</ul> 
-<p>&nbsp;</p>
+  <!-- ── Main ── -->
+  <main>
 
+    <!-- About -->
+    <section id="about">
+      <h2>About</h2>
+      <p>
+        I am a Chief AIGC Scientist at <strong>Intellifusion Inc.</strong>, working on Transformer optimization, generative AI (text-to-image, text-to-video, text-to-3D), and multimodal large language models (MLLM).
+      </p>
+      <p style="margin-top:0.7rem;">
+        My research spans deep learning optimization (numerical linear algebra, matrix calculus, convex optimization), generative models (DDPM, Stable Diffusion / LDM, DALL·E, Imagen), and large language model (LLM) optimization. I have published 40+ papers in top-tier venues including TPAMI, TIP, TCSVT, CVPR, ICCV, ECCV, ICML, ICLR, and NeurIPS. Two of my papers are ESI Highly Cited Papers.
+      </p>
+      <p style="margin-top:0.7rem;">
+        I also run popular educational courses on Bilibili:
+        <a href="https://space.bilibili.com/1706874133/lists/1933483?type=season" target="_blank"><em>Mathematics of Deep Learning</em></a> (268,000+ views)
+        and <a href="https://space.bilibili.com/1706874133/lists/5764548?type=season" target="_blank"><em>Mathematics of Transformer</em></a> (77,000+ views).
+      </p>
 
-<h2>Source Code</h2>
-<p><font color="#66FF00"><a href="http://dl.dropbox.com/u/66608698/SourceCode/PRICoLBP.zip">Source Code Download</a></font>
-&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<font color="#66FF00"><a href="http://pan.baidu.com/share/link?shareid=251070&uk=237669910">Source Code Download (Access Link From China)</a></font>
-</p>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-num">5000+</div>
+          <div class="stat-label">Google Scholar Citations</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">40+</div>
+          <div class="stat-label">Publications</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">2</div>
+          <div class="stat-label">ESI Highly Cited Papers</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">268K+</div>
+          <div class="stat-label">Bilibili Views (DL Math)</div>
+        </div>
+      </div>
+    </section>
 
+    <!-- Work Experience -->
+    <section id="experience">
+      <h2>Work Experience</h2>
 
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">Intellifusion Inc.</span>
+          <span class="entry-date">Mar 2024 – Present</span>
+        </div>
+        <div class="entry-role">Chief AIGC Scientist</div>
+        <div class="entry-desc">Transformer optimization, AIGC (T2I, T2V, Text-to-3D), MLLM</div>
+      </div>
 
-<p>With the provided source code, you could easily run and get our results. </p>
-<p>&nbsp;</p>
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">International Digital Economy Academy (IDEA)</span>
+          <span class="entry-date">Aug 2021 – Mar 2024</span>
+        </div>
+        <div class="entry-role">Senior Researcher</div>
+        <div class="entry-desc">AIGC, model optimization, LLM, object detection</div>
+      </div>
 
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">Ping An Property Insurance</span>
+          <span class="entry-date">Apr 2019 – Jul 2021</span>
+        </div>
+        <div class="entry-role">Senior Image Expert (Team Manager)</div>
+        <div class="entry-desc">Object detection and recognition, OCR, NLP</div>
+      </div>
 
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">Shenzhen Research Institute of Big Data (SRIBD)</span>
+          <span class="entry-date">May 2018 – Apr 2019</span>
+        </div>
+        <div class="entry-role">Research Scientist</div>
+        <div class="entry-desc">Object detection and recognition, OCR</div>
+      </div>
 
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">Hong Kong Polytechnic University (HK PolyU)</span>
+          <span class="entry-date">May 2016 – May 2018</span>
+        </div>
+        <div class="entry-role">Postdoctoral Researcher</div>
+        <div class="entry-desc">Deep learning for facial attribute analysis</div>
+      </div>
 
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">University of Oulu, Center for Machine Vision Research</span>
+          <span class="entry-date">Jan 2014 – Nov 2015</span>
+        </div>
+        <div class="entry-role">Researcher / Postdoctoral Researcher</div>
+        <div class="entry-desc">Texture analysis, medical image processing</div>
+      </div>
+    </section>
 
+    <!-- Education -->
+    <section id="education">
+      <h2>Education</h2>
 
-<h2>Applications</h2>
-The proposed feature is extremely effective on a lot of applications, such as texture classification, material recognition, flower recognition, leaf recognition, food recognition and scene classification.
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">Beijing University of Posts and Telecommunications (BUPT)</span>
+          <span class="entry-date">2008 – 2015</span>
+        </div>
+        <div class="entry-role">Ph.D. — Signal and Information Processing</div>
+      </div>
 
-<p>In our work, we test our feature on eight datasets, including <a href="http://www.ux.uis.no/~tranden/brodatz.html">Brodatz</a>, <a href="http://www.cs.columbia.edu/CAVE/software/curet/">CUReT</a>, and <a href="http://www.nada.kth.se/cvap/databases/kth-tips/download.html">KTH-TIPS</a>, <a href="http://people.csail.mit.edu/celiu/CVPR2010/index.html">Flickr Material Database</a>, <a href="http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html">Oxford Flower 102</a>, 
-<a href="http://www.isy.liu.se/cvl/ImageDB/public/blad/">Swedish Leaf Database</a>, <a href="http://pfid.intel-research.net/">Food database</a> and <a href="http://www-cvr.ai.uiuc.edu/ponce_grp/data/">Scene-15 database</a>.  </p>  The following table presents the detailed information for each database.
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">Beijing University of Posts and Telecommunications (BUPT)</span>
+          <span class="entry-date">2004 – 2008</span>
+        </div>
+        <div class="entry-role">B.S. — Information Engineering</div>
+      </div>
+    </section>
 
-<center>
-<img src="images/databases.png" width="900" height="158" alt="Databases" />
-</center> 
+    <!-- Teaching -->
+    <section id="teaching">
+      <h2>Teaching &amp; Outreach</h2>
 
-<p>Detailed experimental results and analysis for all applications can be found at follows:
-<p> </p>
-<center>
-<font size=4><a href="Texture.html">Texture Classification</a></font>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="teach-item"><i class="fa fa-chalkboard-teacher"></i>
+        <strong>Mathematics of Deep Learning</strong> — Linear Algebra, Vector Calculus, Convex Optimization (Nesterov), Deep Learning Concepts
+      </div>
+      <div class="teach-item"><i class="fa fa-chalkboard-teacher"></i>
+        <strong>Mathematics of Transformer</strong> — Numerical Linear Algebra, Matrix Calculus, High-dimensional Probability, Transformer
+      </div>
+      <div class="teach-item"><i class="fa fa-chalkboard-teacher"></i>
+        <strong>Mathematics of Machine Learning</strong> — Numerical Linear Algebra, Matrix / Vector Calculus, Probability, Numerical Optimization
+      </div>
+      <div class="teach-item"><i class="fa fa-chalkboard-teacher"></i>
+        <strong>Generative AI (AIGC)</strong> — Variational AutoEncoder, Normalizing Flow, Diffusion Model, Auto-regressive Methods, Energy-based Methods
+      </div>
 
-<font size=4><a href="Material.html">Material Recognition</a></font>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<font size=4><a href="Flower.html">Flower Recognition</a></font>
-</center>
-<p> </p>
+      <div style="margin-top:0.9rem; font-size:0.88rem;">
+        <p>
+          <i class="fa-brands fa-bilibili" style="color:var(--accent);"></i>
+          <a href="https://space.bilibili.com/1706874133/lists/1933483?type=season" target="_blank">
+            <em>Mathematics of Deep Learning</em>
+          </a> — 268,000+ views
+        </p>
+        <p style="margin-top:0.4rem;">
+          <i class="fa-brands fa-bilibili" style="color:var(--accent);"></i>
+          <a href="https://space.bilibili.com/1706874133/lists/5764548?type=season" target="_blank">
+            <em>Mathematics of Transformer</em>
+          </a> — 77,000+ views
+        </p>
+      </div>
+    </section>
 
-<div style="text-align:center">  <font size=4><a href="Leaf.html">Leaf Recognition</a></font>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<font size=4><a href="Food.html">Food Recognition</a></font>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<font size=4><a href="Scene.html">Scene Classification</a></font>  </div>
-<p>&nbsp;</p>  
+    <!-- Publications -->
+    <section id="publications">
+      <h2>Selected Publications</h2>
+      <p style="font-size:0.82rem; color:var(--muted); margin-bottom:1.2rem;">
+        * denotes corresponding author or project leader.
+        <a href="https://scholar.google.com/citations?user=qxam-a8AAAAJ" target="_blank" style="margin-left:0.5rem;">Full list on Google Scholar →</a>
+      </p>
 
+      <!-- Optimization -->
+      <div class="pub-category">
+        <h3>1. Optimization of Deep Learning &amp; LLM</h3>
 
+        <div class="pub-item">
+          <div class="pub-title">DNT: A Deeply Normalized Transformer That Can Be Trained by Momentum SGD</div>
+          <div class="pub-authors">Xianbiao Qi*, Marco Chen, Wenjie Xiao, Jiaquan Ye, Yelin He, Chun-Guang Li, Zhouchen Lin</div>
+          <div class="pub-venue"><span class="venue-name">ICLR 2026</span></div>
+        </div>
 
-<h2>Feature Matrices</h2>
-<p>The feature matrices are available at <a href="features/features.html">This Link</a>.</p>
-<p>&nbsp;</p>
+        <div class="pub-item">
+          <div class="pub-title">Taming Transformer Without Using Learning Rate Warmup</div>
+          <div class="pub-authors">Xianbiao Qi*, Yelin He, Jiaquan Ye, Chun-Guang Li, Bojia Zi, Xili Dai, Qin Zou, Rong Xiao</div>
+          <div class="pub-venue"><span class="venue-name">ICLR 2025</span></div>
+        </div>
 
-  
-<h2>Relevant Toolboxs</h2>
-<p><a href="http://www.vlfeat.org/">VLFeat</a>.</p>
-<p><a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">LibSVM</a>.</p>
-<p>&nbsp;</p>
+        <div class="pub-item">
+          <div class="pub-title">LipsFormer: Introducing Lipschitz Continuity to Vision Transformers</div>
+          <div class="pub-authors">Xianbiao Qi*, Jianan Wang, Yihao Chen, Yukai Shi, Lei Zhang</div>
+          <div class="pub-venue"><span class="venue-name">ICLR 2023</span></div>
+        </div>
 
+        <div class="pub-item">
+          <div class="pub-title">SimpleGPT: Improving GPT via a Simple Normalization Strategy</div>
+          <div class="pub-authors">Xianbiao Qi*, Marco Chen, Yelin He, Jiaquan Ye, Rong Xiao</div>
+          <div class="pub-venue"><span class="venue-name">Submission ICML 2026</span></div>
+        </div>
 
-  
-</p>
-<h2>Acknowledgments</h2>
-<p>This work was supported by National Natural Science Foundation of China(Grant No.61005004 and 61175011),the 111 project(Grant No.B08004), and the Fundamental Research Funds for the Central Universities(Grant No.2012RC0108).</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+        <div class="pub-item">
+          <div class="pub-title">Delving into Muon and Beyond: Deep Analysis and Extensions</div>
+          <div class="pub-authors">Xianbiao Qi*, Marco Chen, Yelin He, Jiaquan Ye, Rong Xiao</div>
+          <div class="pub-venue"><span class="venue-name">Submission ICML 2026</span></div>
+        </div>
+      </div>
 
+      <!-- AIGC -->
+      <div class="pub-category">
+        <h3>2. AIGC (Image / Video / 3D Generation)</h3>
 
+        <div class="pub-item">
+          <div class="pub-title">Refaçade: Editing Object with Given Reference Texture</div>
+          <div class="pub-authors">Youze Huang, Penghui Ruan, Bojia Zi, Xianbiao Qi*, Jianan Wang, Rong Xiao</div>
+          <div class="pub-venue"><span class="venue-name">CVPR 2026</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">CTRL&amp;SHIFT: High-quality Geometry-Aware Object Manipulation in Visual Generation</div>
+          <div class="pub-authors">Penghui Ruan, Bojia Zi, Xianbiao Qi*, et al.</div>
+          <div class="pub-venue"><span class="venue-name">ICLR 2026</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">Senorita-2M: A High-Quality Instruction-based Dataset for General Video Editing</div>
+          <div class="pub-authors">Bojia Zi, Penghui Ruan, Marco Chen, Xianbiao Qi*, et al.</div>
+          <div class="pub-venue"><span class="venue-name">NeurIPS 2025</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">MiniMax-Remover: Taming Bad Noise Helps Video Object Removal</div>
+          <div class="pub-authors">Bojia Zi, Weixuan Peng, Xianbiao Qi*, Jianan Wang, Shihao Zhao, Rong Xiao, Kam-Fai Wong</div>
+          <div class="pub-venue"><span class="venue-name">NeurIPS 2025</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">BiGR: Harnessing Binary Latent Codes for Image Generation and Improved Visual Representation</div>
+          <div class="pub-authors">Shaozhe Hao, Xuantong Liu, Xianbiao Qi*, Shihao Zhao, Bojia Zi, Rong Xiao, Kai Han, Kwan-Yee K. Wong</div>
+          <div class="pub-venue"><span class="venue-name">ICLR 2025</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">Elucidating the Design Space of Language Models for Image Generation</div>
+          <div class="pub-authors">Xuantong Liu, Shaozhe Hao, Xianbiao Qi*, Tianyang Hu, Jun Wang, Rong Xiao, Yuan Yao</div>
+          <div class="pub-venue"><span class="venue-name">ICML 2025</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">CoCoCo: Improving Text-Guided Video Inpainting for Better Consistency, Controllability and Compatibility</div>
+          <div class="pub-authors">Bojia Zi, Shihao Zhao, Xianbiao Qi*, et al.</div>
+          <div class="pub-venue"><span class="venue-name">AAAI 2025</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">DreamTime: An Improved Optimization Strategy for Text-to-3D Content Creation</div>
+          <div class="pub-authors">Yukun Huang, Jianan Wang, Yukai Shi, Xianbiao Qi, Zheng-Jun Zha, Lei Zhang</div>
+          <div class="pub-venue"><span class="venue-name">ICLR 2024</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">TOSS: High-quality Text-guided Novel View Synthesis from a Single Image</div>
+          <div class="pub-authors">Yukai Shi, Jianan Wang, He Cao, Boshi Tang, Xianbiao Qi, et al.</div>
+          <div class="pub-venue"><span class="venue-name">ICLR 2024</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">DreamWaltz: Make a Scene with Complex 3D Animatable Avatars</div>
+          <div class="pub-authors">Yukun Huang, Jianan Wang, Ailing Zeng, He Cao, Xianbiao Qi, Yukai Shi, Zheng-Jun Zha, Lei Zhang</div>
+          <div class="pub-venue"><span class="venue-name">NeurIPS 2023</span></div>
+        </div>
+      </div>
+
+      <!-- General CV -->
+      <div class="pub-category">
+        <h3>3. General Computer Vision</h3>
+
+        <div class="pub-item">
+          <div class="pub-title">DAB-DETR: Dynamic Anchor Boxes Are Better Queries for DETR</div>
+          <div class="pub-authors">Shilong Liu, Feng Li, Hao Zhang, Xiao Yang, Xianbiao Qi, Hang Su, Jun Zhu, Lei Zhang</div>
+          <div class="pub-venue"><span class="venue-name">ICLR 2022</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">DeepCrack: Learning Hierarchical Convolutional Features for Crack Detection</div>
+          <div class="pub-authors">Qin Zou, Zheng Zhang, Qingquan Li, Xianbiao Qi, Qian Wang, Song Wang</div>
+          <div class="pub-venue"><span class="venue-name">IEEE TIP 2018</span></div>
+        </div>
+      </div>
+
+      <!-- OCR -->
+      <div class="pub-category">
+        <h3>4. OCR &amp; Document Understanding</h3>
+
+        <div class="pub-item">
+          <div class="pub-title">MASTER: Multi-Aspect Non-local Network for Scene Text Recognition</div>
+          <div class="pub-authors">Ning Lu, Wenwen Yu, Xianbiao Qi*, Yihao Chen, Ping Gong, Rong Xiao, Xiang Bai</div>
+          <div class="pub-venue"><span class="venue-name">Pattern Recognition 2021</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">PICK: Processing Key Information Extraction from Documents Using Improved Graph Learning</div>
+          <div class="pub-authors">Wenwen Yu, Ning Lu, Xianbiao Qi*, Ping Gong, Rong Xiao</div>
+          <div class="pub-venue"><span class="venue-name">ICPR 2021</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">EMU: Effective Multi-Hot Encoding for Lightweight Scene Text Recognition</div>
+          <div class="pub-authors">Bingcong Li, Xin Tang, Xianbiao Qi*, Yihao Chen, Chun-Guang Li, Rong Xiao</div>
+          <div class="pub-venue"><span class="venue-name">IEEE TCSVT 2022</span></div>
+        </div>
+      </div>
+
+      <!-- LLM -->
+      <div class="pub-category">
+        <h3>5. LLM &amp; MLLM</h3>
+
+        <div class="pub-item">
+          <div class="pub-title">DisCo-CLIP: A Distributed Contrastive Loss for Memory Efficient CLIP Training</div>
+          <div class="pub-authors">Yihao Chen, Xianbiao Qi*, Jianan Wang, Lei Zhang</div>
+          <div class="pub-venue"><span class="venue-name">CVPR 2023</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">Delta-LoRA: Fine-Tuning High-Rank Parameters with the Delta of Low-Rank Matrices</div>
+          <div class="pub-authors">Bojia Zi, Xianbiao Qi*, Lingzhi Wang, Jianan Wang, Kam-Fai Wong, Lei Zhang</div>
+          <div class="pub-venue"><span class="venue-name">arXiv 2023</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">Multi-Modal Representation Learning via Semi-Supervised Rate Reduction for Generalized Category Discovery</div>
+          <div class="pub-authors">Wei He, Xianghan Meng, Zhiyuan Huang, Xianbiao Qi, Rong Xiao, Chun-Guang Li</div>
+          <div class="pub-venue"><span class="venue-name">CVPR 2026</span></div>
+        </div>
+      </div>
+
+      <!-- Subspace -->
+      <div class="pub-category">
+        <h3>6. Subspace Clustering</h3>
+
+        <div class="pub-item">
+          <div class="pub-title">Exploring a Principled Framework for Deep Subspace Clustering</div>
+          <div class="pub-authors">Xianghan Meng, Zhiyuan Huang, Wei He, Xianbiao Qi, Rong Xiao, Chun-Guang Li</div>
+          <div class="pub-venue"><span class="venue-name">ICLR 2025</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">Neural Normalized Cut: A Differential and Generalizable Approach for Spectral Clustering</div>
+          <div class="pub-authors">Wei He, Shangzhi Zhang, Chun-Guang Li, Xianbiao Qi, Rong Xiao</div>
+          <div class="pub-venue"><span class="venue-name">Pattern Recognition 2025</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">Self-Supervised Convolutional Subspace Clustering Network</div>
+          <div class="pub-authors">Junjian Zhang, Chun-Guang Li, Chong You, Xianbiao Qi, Honggang Zhang, Jun Guo, Zhouchen Lin</div>
+          <div class="pub-venue"><span class="venue-name">CVPR 2019</span></div>
+        </div>
+      </div>
+
+      <!-- Others -->
+      <div class="pub-category">
+        <h3>7. Classic Works</h3>
+
+        <div class="pub-item">
+          <div class="pub-title">
+            Pairwise Rotation Invariant Co-occurrence Local Binary Pattern
+            <span class="badge badge-star">ESI Highly Cited</span>
+          </div>
+          <div class="pub-authors">Xianbiao Qi, Rong Xiao, Chun-Guang Li, Yu Qiao, Jun Guo, Xiaoou Tang</div>
+          <div class="pub-venue"><span class="venue-name">IEEE TPAMI 2014</span></div>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-title">Globally Rotation Invariant Multi-Scale Co-occurrence Local Binary Pattern</div>
+          <div class="pub-authors">Xianbiao Qi, Linlin Shen, Guoying Zhao, Qingquan Li, Matti Pietikäinen</div>
+          <div class="pub-venue"><span class="venue-name">Image and Vision Computing 2015</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Honors & Awards -->
+    <section id="honors">
+      <h2>Honors &amp; Awards</h2>
+
+      <div class="award-item"><i class="fa fa-trophy"></i>
+        ICDAR 2021 Table Recognition to LaTeX — <strong>Champion</strong>
+      </div>
+      <div class="award-item"><i class="fa fa-trophy"></i>
+        ICDAR 2021 Formula Detection Competition — <strong>Champion</strong>
+      </div>
+      <div class="award-item"><i class="fa fa-trophy"></i>
+        CVPR 2021 TextVQA Competition — <strong>Champion</strong>
+      </div>
+      <div class="award-item"><i class="fa fa-trophy"></i>
+        ICDAR 2019 Receipt Recognition Key Information Extraction — <strong>Champion</strong>
+      </div>
+      <div class="award-item"><i class="fa fa-trophy"></i>
+        Pattern Recognition Letters Special Issue — Fluorescence Cell Recognition — <strong>Champion &amp; Runner-up</strong>
+      </div>
+      <div class="award-item"><i class="fa fa-medal"></i>
+        ICDAR 2021 Table Recognition to HTML — <strong>Runner-up</strong>
+      </div>
+      <div class="award-item"><i class="fa fa-medal"></i>
+        Baidu / Peking University Global Autonomous Driving Competition — <strong>Runner-up</strong>
+      </div>
+      <div class="award-item"><i class="fa fa-medal"></i>
+        5th China Innovation Challenge Smart Education Special Competition — <strong>Runner-up</strong>
+      </div>
+      <div class="award-item"><i class="fa fa-star"></i>
+        Ping An Group Young Scientist (9 selected among 400,000+ employees)
+      </div>
+      <div class="award-item"><i class="fa fa-star"></i>
+        Ping An Group Breakthrough Innovation Award
+      </div>
+      <div class="award-item"><i class="fa fa-star"></i>
+        2022 MIIT "揭榜挂帅" Project — Successfully Shortlisted Unit (third applicant)
+      </div>
+      <div class="award-item"><i class="fa fa-star"></i>
+        ICLR 2026 Area Chair &nbsp;|&nbsp; CVPR 2021 Outstanding Reviewer
+      </div>
+      <div class="award-item"><i class="fa fa-tv"></i>
+        Work reported by <a href="http://jingji.cctv.com/2019/08/30/ARTIE3NyUXhKrEnChN3KPoPw190830.shtml" target="_blank">CCTV Finance Channel and CCTV News Channel</a>
+      </div>
+    </section>
+
+  </main>
 </div>
-</div>
+
+<footer>
+  &copy; <span id="yr"></span> Xianbiao Qi &nbsp;·&nbsp; Shenzhen, China
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</footer>
+
 </body>
 </html>
