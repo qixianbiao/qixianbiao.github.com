@@ -149,24 +149,6 @@
       display: inline-block;
     }
 
-    /* ── About ── */
-    .about-stats {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-    .stat-box {
-      background: var(--bg-sidebar);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.7rem 1.2rem;
-      text-align: center;
-      min-width: 110px;
-    }
-    .stat-num { font-size: 1.4rem; font-weight: 700; color: var(--accent); }
-    .stat-label { font-size: 0.75rem; color: var(--muted); }
-
     /* ── Experience / Education ── */
     .entry { margin-bottom: 1.2rem; }
     .entry-header {
@@ -249,8 +231,8 @@
 <nav>
   <ul>
     <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#teaching">Teaching</a></li>
     <li><a href="#publications">Publications</a></li>
     <li><a href="#honors">Honors</a></li>
@@ -305,23 +287,26 @@
         and <a href="https://space.bilibili.com/1706874133/lists/5764548?type=season" target="_blank"><em>Mathematics of Transformer</em></a> (77,000+ views).
       </p>
 
-      <div class="about-stats">
-        <div class="stat-box">
-          <div class="stat-num">5000+</div>
-          <div class="stat-label">Google Scholar Citations</div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <h2>Education</h2>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">Beijing University of Posts and Telecommunications (BUPT)</span>
+          <span class="entry-date">2008 – 2015</span>
         </div>
-        <div class="stat-box">
-          <div class="stat-num">40+</div>
-          <div class="stat-label">Publications</div>
+        <div class="entry-role">Ph.D. — Signal and Information Processing</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-org">Beijing University of Posts and Telecommunications (BUPT)</span>
+          <span class="entry-date">2004 – 2008</span>
         </div>
-        <div class="stat-box">
-          <div class="stat-num">2</div>
-          <div class="stat-label">ESI Highly Cited Papers</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-num">268K+</div>
-          <div class="stat-label">Bilibili Views (DL Math)</div>
-        </div>
+        <div class="entry-role">B.S. — Information Engineering</div>
       </div>
     </section>
 
@@ -381,27 +366,6 @@
         </div>
         <div class="entry-role">Researcher / Postdoctoral Researcher</div>
         <div class="entry-desc">Texture analysis, medical image processing</div>
-      </div>
-    </section>
-
-    <!-- Education -->
-    <section id="education">
-      <h2>Education</h2>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span class="entry-org">Beijing University of Posts and Telecommunications (BUPT)</span>
-          <span class="entry-date">2008 – 2015</span>
-        </div>
-        <div class="entry-role">Ph.D. — Signal and Information Processing</div>
-      </div>
-
-      <div class="entry">
-        <div class="entry-header">
-          <span class="entry-org">Beijing University of Posts and Telecommunications (BUPT)</span>
-          <span class="entry-date">2004 – 2008</span>
-        </div>
-        <div class="entry-role">B.S. — Information Engineering</div>
       </div>
     </section>
 
